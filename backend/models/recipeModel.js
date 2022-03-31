@@ -16,6 +16,15 @@ const recipeSchema = mongoose.Schema(
 		},
 		author: {
 			type: String,
+			required: [true, 'Please add an author'],
+			trim: true,
+		},
+		image: {
+			type: String,
+			trim: true,
+		},
+		slug: {
+			type: String,
 			required: [true, 'Please add a subtitle'],
 			trim: true,
 			unique: [true, 'Subtitle already exists'],
