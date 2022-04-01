@@ -1,0 +1,38 @@
+1. Setup redux folder and creat the slice for the authentication
+2. Import createSlice and createAsyncThunk
+3. Create the initial state
+4. Create variable from local storage, collecting the user and setting it in the initial state, along with isError, isLoading, isSuccess, and message
+5. Create the slice and add name, initial state, reducers and extra (async) reducers
+6. Add reset reducer to reset the initial state.
+7. Export authSlice.reducer and the reducer (reset) from authSlice.actions
+
+Register user
+
+1. use createAsyncThunk and add the slice object key (in this case 'auth/register') as the argument.
+2. Use this to wrap an async funtion that takes the user and thunkAPI as params.
+3. Do a TRY and runt the authservice.register (separate file) with the user; CATCH – handle error:
+   a. create a message variable that checks the error response, response.data, response.data.message OR error.message OR error.toString()
+   b. return thunkAPI.rejectWithValue with the message
+
+authservice:
+
+1.  create async func that makes a post request to the API with axios (install axios), store as response variable.
+2.  IF(response.data) – set user in local storage and return the response data
+
+add proxy in package.json (FRONTEND!) at the top of the file for the server address
+
+extraReducers:
+
+1. takes builder as argument
+2. addCase for each register state (pending, fulfilled, and rejected) and set the state variables accordingly (user and error comes as the payload )
+
+Toast notifications:
+
+1. Install 'react-toastify' and import the {ToastContainer} + the stylessheet ('react-toastify/dist/ReactTostify.css')
+2. Add the component just outside the router
+
+Hooking up the form:
+
+1. in the page file, import: useSelected and useDispatch from redux; useNavigation from react router and toast (need to install react-tostify)
+2. Finish off the onSubmit and check so that the passwords match before dispatching the register method with the userData (minus the confirm pw) (show a toast error if the passwords dont match)
+3. Create a useEffect that monitors all the global state variables, except is loading

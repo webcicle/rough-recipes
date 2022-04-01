@@ -3,8 +3,9 @@ import {
 	Text,
 	Button,
 	Container,
-	Image,
+	Icon,
 	Logo,
+	LogoContainer,
 	Menu,
 	LinksContainer,
 	Link,
@@ -19,7 +20,11 @@ Header.Container = function HeaderContainer({ children, ...restProps }) {
 };
 
 Header.Logo = function HeaderLogo({ src, menuOpen, ...restProps }) {
-	return <Logo {...restProps} menuOpen={menuOpen} src={src} />;
+	return (
+		<LogoContainer menu={menuOpen}>
+			<Logo {...restProps} src={src} />
+		</LogoContainer>
+	);
 };
 
 Header.Text = function HeaderText({ children, ...restProps }) {
@@ -29,7 +34,7 @@ Header.Text = function HeaderText({ children, ...restProps }) {
 Header.Button = function HeaderButton({ icon, alt, children, ...restProps }) {
 	return (
 		<Button {...restProps}>
-			<Image src={icon} alt={alt} />
+			<Icon src={icon} alt={alt} />
 		</Button>
 	);
 };

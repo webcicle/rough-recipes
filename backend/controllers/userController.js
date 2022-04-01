@@ -1,5 +1,4 @@
 const asyncHandler = require('express-async-handler');
-// const Users = require('../models/userModel')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
@@ -13,6 +12,7 @@ const createUser = asyncHandler(async (req, res) => {
 	}
 
 	const userExists = await User.findOne({ username });
+
 	if (userExists) {
 		res.status(400);
 		throw new Error('User already exists');
@@ -40,7 +40,7 @@ const createUser = asyncHandler(async (req, res) => {
 		throw new Error('Invalid user data');
 	}
 
-	res.status(200).json({ message: 'Create new user' });
+	// res.status(200).json({ message: 'Created new user' });
 });
 
 const loginUser = asyncHandler(async (req, res) => {

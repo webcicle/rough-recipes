@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { Home, Login, Register, Recipes } from './pages';
 import { HeaderContainer } from './containers';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ColorStyles, GlobalStyles } from './styles';
 import './styles/fonts.css';
 
@@ -17,6 +19,7 @@ export default function App() {
 					<Route path='/register' element={<Register />} />
 					<Route path='/recipes' element={<Recipes />} />
 				</Routes>
+				<ToastContainer />
 			</div>
 		</>
 	);

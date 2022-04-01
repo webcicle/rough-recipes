@@ -1,0 +1,43 @@
+// const [formData, setFormData] = useState({
+//    username: '',
+// 	email: '',
+// 	password: '',
+// 	password2: '',
+// });
+
+// const { username, email, password, password2 } = formData;
+
+// const { user, isLoading, isError, isSuccess, message } = useSelector(
+// 	(state) => state.auth
+// );
+
+// const dispatch = useDispatch();
+// const navigate = useNavigate();
+
+// const formDataChange = (e) => {
+// 	const { name, value } = e.target;
+// 	setFormData((prev) => ({ ...prev, [name]: value }));
+// };
+
+// useEffect(() => {
+// 	if (isError) {
+// 		console.log(message);
+// 		toast.error(message);
+// 		return;
+// 	}
+// 	if (isSuccess || user) {
+// 		navigate(ROUTES.PROFILE);
+// 	}
+
+// 	dispatch(reset());
+// }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+// const handleSubmit = (e) => {
+// 	e.preventDefault();
+// 	if (password === password2) {
+// 		const userData = { username, email, password };
+// 		dispatch(registerUser(userData));
+// 	} else {
+// 		toast.error("Passwords don't match");
+// 	}
+// };
