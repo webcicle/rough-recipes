@@ -59,12 +59,12 @@ export const LogoContainer = styled.div`
 	top: 0;
 
 	// transition
-	transform: translate(-50%, -54.5%);
+	transform: translate(-50%, -52.5%);
 	transform: translate(${({ menu }) => menu && '-50%'});
 
 	// transition browser support
-	-webkit-transform: translate(-50%, -54.5%);
-	-moz-transform: translate(-50%, -54.5%);
+	-webkit-transform: translate(-50%, -52.5%);
+	-moz-transform: translate(-50%, -52.5%);
 
 	-webkit-transform: translate(${({ menu }) => menu && '-50%'});
 	-moz-transform: translate(${({ menu }) => menu && '-50%'});

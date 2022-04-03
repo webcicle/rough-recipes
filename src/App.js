@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Login, Register, Recipes } from './pages';
+import { Home, Login, Profile, Register, Recipes } from './pages';
 import { HeaderContainer } from './containers';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +18,7 @@ export default function App() {
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/recipes' element={<Recipes />} />
+					<Route path='/profile' element={<Profile />} />
 				</Routes>
 				<ToastContainer />
 			</div>

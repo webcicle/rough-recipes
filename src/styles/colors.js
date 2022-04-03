@@ -10,6 +10,7 @@ const theme = css`
 		--grey-color: #14080e;
 		--dark-grey-color: #49475b;
 		--link-color: #c7c7c7;
+		--off-white-color: #f4f4f4;
 	}
 	.dark-theme {
 		--primary-color: #17ecb9;

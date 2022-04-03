@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser, loginUser, reset } from '../features/authSlice';
+import { registerUser, loginUser, reset } from '../features/auth/authSlice';
 import * as ROUTES from '../constants/routes';
 import { toast } from 'react-toastify';
 

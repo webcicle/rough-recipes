@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authServices from './authServices';
-import { toast } from 'react-toastify';
 
 const user = JSON.parse(localStorage.getItem('user'));
 

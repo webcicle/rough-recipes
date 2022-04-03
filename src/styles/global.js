@@ -17,6 +17,21 @@ const styles = css`
 		margin: 0;
 		padding: 0;
 	}
+
+	h1 {
+		font-family: var(--primary-font);
+	}
+
+	h2,
+	h3,
+	h4,
+	p {
+		font-family: var(--secondary-font);
+	}
+
+	body {
+		background-color: var(--main-bg-color);
+	}
 `;
 
 const GlobalStyles = createGlobalStyle(styles);
