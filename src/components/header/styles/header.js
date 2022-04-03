@@ -1,4 +1,7 @@
 import styled from 'styled-components/macro';
+import * as SCREEN_SIZES from '../../../constants/screen-sizes.js';
+
+const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 
 export const Container = styled.div`
 	background: linear-gradient(
@@ -16,10 +19,10 @@ export const Container = styled.div`
 	align-items: center;
 	box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.1);
 
-	@media (min-width: 700px) {
+	@media (min-width: ${TABLET_WIDTH}px) {
 		min-height: 60px;
 	}
-	@media (min-width: 1200px) {
+	@media (min-width: ${DESKTOP_WIDTH}px) {
 		min-height: 70px;
 	}
 `;
@@ -98,7 +101,7 @@ export const LogoContainer = styled.div`
 		}
 	}
 
-	@media (min-width: 1200px) {
+	@media (min-width: ${DESKTOP_WIDTH}px) {
 		width: auto;
 	}
 `;
@@ -121,7 +124,7 @@ export const Link = styled.button`
 	border: 0;
 	z-index: 222;
 
-	@media (min-width: 700px) {
+	@media (min-width: ${TABLET_WIDTH}px) {
 		--top-row: 8.5rem;
 		--bottom-row: 6.5rem;
 		color: var(--link-color);
@@ -167,7 +170,7 @@ export const LinksContainer = styled.nav`
 	display: flex;
 	flex-direction: column;
 
-	@media (min-width: 700px) {
+	@media (min-width: ${TABLET_WIDTH}px) {
 		margin-top: 10rem;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
