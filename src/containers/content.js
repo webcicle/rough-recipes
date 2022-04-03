@@ -5,9 +5,11 @@ const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 
 const Main = styled.main`
 	width: 100%;
-	margin: 4rem auto;
+	margin: 0 auto;
+	margin-bottom: 2rem;
+	padding-top: 8rem;
 	background-color: var(--off-white-color);
-	padding: 1em 0.4em;
+	padding: 1.5em;
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
 
 	// dynamic border radius, based on the component property 'direction'
@@ -16,14 +18,14 @@ const Main = styled.main`
 
 	--radius: 25px;
 	${(props) =>
-		props.direction === 'down' &&
-		'border-radius: var(--radius) var(--radius) 0px 0px; box-shadow: -6px -4px 20px rgba(0, 0, 0, 0.25)'};
-	${(props) =>
 		props.direction === 'center' &&
 		'border-radius: var(--radius) var(--radius) var(--radius) var(--radius)'};
 	${(props) =>
 		props.direction === 'up' &&
 		'border-radius: 0px 0px var(--radius) var(--radius)'};
+	${(props) =>
+		props.direction === 'down' &&
+		'border-radius: var(--radius) var(--radius) 0px 0px; box-shadow: -6px -4px 20px rgba(0, 0, 0, 0.25)'};
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		--radius: 45px;
@@ -31,6 +33,7 @@ const Main = styled.main`
 	}
 	@media (min-width: ${TABLET_WIDTH}px) and (max-width: ${DESKTOP_WIDTH}px) {
 		position: relative;
+		margin-bottom: 3rem;
 
 		&::before {
 			content: '';
@@ -40,14 +43,14 @@ const Main = styled.main`
 			background-color: inherit;
 			top: 27px;
 			left: 0;
-			z-index: -1;
+			z-index: -5;
 			border-radius: inherit;
 			box-shadow: inherit;
 
 			--radius: 25px;
 			${(props) =>
 				props.direction === 'down' &&
-				'border-radius: var(--radius) var(--radius) 0px 0px'};
+				'border-radius: var(--radius) var(--radius) var(--radius) var(--radius)'};
 			${(props) =>
 				props.direction === 'center' &&
 				'border-radius: var(--radius) var(--radius) var(--radius) var(--radius)'};
@@ -69,7 +72,6 @@ export default function ContentContainer({
 }) {
 	return (
 		<Main direction={direction} {...restProps}>
-			<h1>Content container</h1>
 			{children}
 		</Main>
 	);

@@ -29,7 +29,6 @@ export default function useForm() {
 
 	useEffect(() => {
 		if (isError) {
-			console.log(message);
 			toast.error(message);
 			return;
 		}

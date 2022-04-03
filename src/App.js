@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Login, Profile, Register, Recipes } from './pages';
+import { Articles, Home, Login, Profile, Register, Recipes } from './pages';
 import { HeaderContainer } from './containers';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ColorStyles, GlobalStyles } from './styles';
 import './styles/fonts.css';
+import * as ROUTES from './constants/routes';
 
 export default function App() {
 	return (
@@ -14,11 +15,13 @@ export default function App() {
 				<ColorStyles />
 				<HeaderContainer />
 				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/register' element={<Register />} />
-					<Route path='/recipes' element={<Recipes />} />
-					<Route path='/profile' element={<Profile />} />
+					<Route path={ROUTES.HOME} element={<Home />} />
+					<Route path={ROUTES.LOGIN} element={<Login />} />
+					<Route path={ROUTES.REGISTER} element={<Register />} />
+					<Route path={ROUTES.RECIPES} element={<Recipes />} />
+					<Route path={ROUTES.ARTICLES} element={<Articles />} />
+
+					<Route path={ROUTES.PROFILE} element={<Profile />} />
 				</Routes>
 				<ToastContainer />
 			</div>

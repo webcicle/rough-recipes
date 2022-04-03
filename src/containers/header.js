@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Header } from '../components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
+import { useSelector } from 'react-redux';
 
 // const { Text, Button, Logo, Menu, LinksContainer, Link } = Header;
 
@@ -11,6 +12,7 @@ export default function HeaderContainer({ title }) {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { user } = useSelector((state) => state.auth);
 
 	const linkClick = (to) => {
 		setMenuOpen(false);
@@ -34,7 +36,9 @@ export default function HeaderContainer({ title }) {
 					<Header.Link onClick={() => linkClick(ROUTES.ARTICLES)}>
 						Articles
 					</Header.Link>
-					<Header.Link onClick={() => linkClick(ROUTES.PROFILE)}>
+					<Header.Link
+						name='profile'
+						onClick={() => linkClick(user ? ROUTES.PROFILE : ROUTES.LOGIN)}>
 						Profile Page
 					</Header.Link>
 					<Header.Link onClick={() => linkClick(ROUTES.RECIPES)}>
