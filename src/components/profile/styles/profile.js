@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import * as SCREEN_SIZES from '../../../constants/screen-sizes';
 
-const { TABLET_WIDTH } = SCREEN_SIZES;
+const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 
 export const Container = styled.div`
 	--fs: 0.8rem;
@@ -15,8 +15,19 @@ export const Container = styled.div`
 	padding: 1em 1.2em;
 	margin-top: 1rem;
 
+	min-height: 255px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
 	@media (max-width: ${TABLET_WIDTH}px) {
 		margin-top: 2rem;
+		min-height: 225px;
+	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		margin-top: 2.5rem;
+		min-height: 225px;
 	}
 `;
 
@@ -43,7 +54,12 @@ export const DetailValue = styled.p`
 
 export const Edits = styled.div`
 	display: flex;
+	justify-content: space-between;
 	column-gap: 0.6em;
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		justify-content: left;
+	}
 `;
 
 export const Button = styled.button`
@@ -66,4 +82,8 @@ export const Input = styled.input`
 	border: var(--border);
 	border-radius: var(--border-radius);
 	background-color: var(--background-color);
+
+	&:last-of-type {
+		margin-bottom: 0.4em;
+	}
 `;

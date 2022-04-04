@@ -1,31 +1,70 @@
 import ContentContainer from '../containers/content';
 import Profile from '../components/profile';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { logoutUser } from '../features/auth/authSlice';
 import { HOME } from '../constants/routes';
+import axios from 'axios';
+import globalToastConfig from '../styles/globalToastConfig';
 
 export default function ProfilePage() {
 	const [editEmail, setEditEmail] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
 	const [inputData, setInputData] = useState('');
-	const user = useSelector((state) => state.auth);
-	const { username, email } = user.user;
+	const [userData, setUserData] = useState({ email: '', username: '' });
+
+	const API_URL = '/api/users/me';
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const changeEmail = () => {
-		console.log('Changed email');
+	const init = () => {
+		setEditEmail(false);
+		setEditPassword(false);
+		setInputData('');
+	};
+
+	const token = JSON.parse(localStorage.getItem('user')).token;
+
+	const config = {
+		headers: { Authorization: `Bearer ${token}` },
+	};
+
+	const changeEmail = async () => {
+		try {
+			await axios.put(API_URL, { email: inputData }, config);
+			toast('Email updated', globalToastConfig);
+		} catch (error) {
+			toast.error('Cannot change email', globalToastConfig);
+		}
+		setInputData('');
 		setEditEmail(false);
 		setEditPassword(false);
 	};
 
-	const changePassword = () => {
-		console.log('Changed password');
+	const changePassword = async () => {
+		try {
+			await axios.put(API_URL, { password: inputData }, config);
+			toast('Password updated', globalToastConfig);
+		} catch (error) {
+			toast.error('Cannot change password', globalToastConfig);
+		}
+
+		setInputData('');
 		setEditEmail(false);
 		setEditPassword(false);
 	};
+
+	const getUser = async () => {
+		const user = await axios.get(API_URL, config);
+		setUserData(user.data);
+	};
+
+	useEffect(() => {
+		getUser();
+	}, [editEmail]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -45,12 +84,13 @@ export default function ProfilePage() {
 
 	const logout = () => {
 		dispatch(logoutUser());
+		toast('User successfully logged out', globalToastConfig);
 		navigate(HOME);
 	};
 
 	return (
 		<>
-			<ContentContainer direction='up'>
+			<ContentContainer height='285px' direction='up'>
 				<Profile>
 					<Profile.Title>Profile page</Profile.Title>
 					<Profile.Details>
@@ -63,7 +103,7 @@ export default function ProfilePage() {
 						) : (
 							<Profile.Detail>
 								<Profile.DetailTitle>username:</Profile.DetailTitle>
-								<Profile.DetailValue>{username}</Profile.DetailValue>
+								<Profile.DetailValue>{userData.username}</Profile.DetailValue>
 							</Profile.Detail>
 						)}
 						{editEmail ? (
@@ -75,7 +115,7 @@ export default function ProfilePage() {
 						) : (
 							<Profile.Detail>
 								<Profile.DetailTitle>email:</Profile.DetailTitle>
-								<Profile.DetailValue>{email}</Profile.DetailValue>
+								<Profile.DetailValue>{userData.email}</Profile.DetailValue>
 							</Profile.Detail>
 						)}
 					</Profile.Details>
@@ -84,19 +124,26 @@ export default function ProfilePage() {
 							<Profile.EditButton
 								name='email'
 								onClick={editEmail ? changeEmail : setEdit}>
-								Change email address
+								{!editEmail ? 'Change email address' : 'Save new email address'}
 							</Profile.EditButton>
 						)}
 						{!editEmail && (
 							<Profile.EditButton
 								name='password'
 								onClick={editPassword ? changePassword : setEdit}>
-								Change password
+								{!editPassword ? 'Change password' : 'Save new password'}
 							</Profile.EditButton>
 						)}
-						<Profile.EditButton name='logout' onClick={logout}>
-							Logout
-						</Profile.EditButton>
+						{!editEmail && !editPassword && (
+							<Profile.EditButton name='logout' onClick={logout}>
+								Logout
+							</Profile.EditButton>
+						)}
+						{(editEmail || editPassword) && (
+							<Profile.EditButton name='cancel' onClick={init}>
+								Cancel
+							</Profile.EditButton>
+						)}
 					</Profile.Edits>
 				</Profile>
 			</ContentContainer>

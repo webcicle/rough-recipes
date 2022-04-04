@@ -6,6 +6,8 @@ import {
 	Inner,
 	SubmitButton,
 	Title,
+	Text,
+	Link,
 } from './styles/form';
 
 export default function Form({ children, ...restProps }) {
@@ -34,4 +36,14 @@ Form.Input = function FormInput({ ...restProps }) {
 
 Form.SubmitButton = function FormSubmitButton({ children, ...restProps }) {
 	return <SubmitButton {...restProps}>{children}</SubmitButton>;
+};
+Form.Text = function FormText({ children, ...restProps }) {
+	return <Text {...restProps}>{children}</Text>;
+};
+Form.Link = function FormLink({ to, children, ...restProps }) {
+	return (
+		<Link to={to} {...restProps}>
+			{children}
+		</Link>
+	);
 };

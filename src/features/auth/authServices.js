@@ -26,6 +26,8 @@ const logoutUser = () => {
 	localStorage.removeItem('user');
 };
 
+const editUser = async (userData) => {};
+
 const authServices = {
 	registerNewUser,
 	loginUser,

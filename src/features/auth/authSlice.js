@@ -80,6 +80,9 @@ const authSlice = createSlice({
 			})
 			.addCase(loginUser.pending, (state) => {
 				state.isLoading = true;
+				state.isError = false;
+				state.message = '';
+				state.user = null;
 			})
 			.addCase(loginUser.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -92,7 +95,7 @@ const authSlice = createSlice({
 				state.message = action.payload;
 				state.user = null;
 			})
-			.addCase(logoutUser.fulfilled, (state, action) => {
+			.addCase(logoutUser.fulfilled, (state) => {
 				state.user = null;
 			});
 	},

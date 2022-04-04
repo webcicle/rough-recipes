@@ -1,5 +1,6 @@
 import { Form } from '../components';
 import useForm from '../hooks/useForm';
+import { REGISTER } from '../constants/routes';
 
 function Login() {
 	const { formData, formDataChange, handleLogin } = useForm();
@@ -8,7 +9,7 @@ function Login() {
 	return (
 		<Form.Container>
 			<Form onSubmit={handleLogin}>
-				<Form.Title>Login</Form.Title>
+				<Form.Title>Log in</Form.Title>
 				<Form.InputWrapper>
 					<Form.InputTitle>username</Form.InputTitle>
 					<Form.Input
@@ -29,6 +30,10 @@ function Login() {
 						value={password}
 					/>
 				</Form.InputWrapper>
+				<Form.Text>
+					Don't have an account? Click <Form.Link to={REGISTER}>here</Form.Link>{' '}
+					to register.
+				</Form.Text>
 				<Form.SubmitButton type='submit'>login</Form.SubmitButton>
 			</Form>
 		</Form.Container>

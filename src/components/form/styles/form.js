@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Container = styled.div`
 	display: flex;
@@ -8,7 +9,7 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
 	font-family: var(--primary-font);
-	font-size: 0.6em;
+	font-size: 1em;
 	text-align: left;
 `;
 
@@ -24,7 +25,7 @@ export const Inner = styled.form`
 `;
 
 export const InputTitle = styled.p`
-	font-size: 0.4rem;
+	font-size: 0.5rem;
 	font-family: var(--primary-font);
 	margin-bottom: 0.6em;
 	padding-left: 1em;
@@ -38,7 +39,7 @@ export const Input = styled.input`
 	border: 1px solid var(--dark-grey-color);
 	padding: 0.3em 0.5em;
 	font-family: var(--secondary-font);
-	font-size: 0.75em;
+	font-size: 0.8em;
 
 	&::placeholder {
 		font-family: var(--secondary-font);
@@ -72,4 +73,13 @@ export const SubmitButton = styled.button`
 		transition-duration: 100ms;
 		transition-timing-function: ease-in;
 	}
+`;
+
+export const Text = styled.p`
+	font-size: 0.8em;
+	color: var(--dark-grey-color);
+`;
+
+export const Link = styled(RouterLink)`
+	color: var(--dark-grey-color);
 `;
