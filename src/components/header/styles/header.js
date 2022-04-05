@@ -19,7 +19,7 @@ export const Container = styled.div`
 	align-items: center;
 	box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.1);
 
-	@media (min-width: ${TABLET_WIDTH}px) {
+	@media (min-width: 700px) {
 		min-height: 60px;
 	}
 	@media (min-width: ${DESKTOP_WIDTH}px) {
@@ -78,7 +78,7 @@ export const LogoContainer = styled.div`
 
 	width: 50%;
 
-	@media (min-width: 700px) {
+	@media (min-width: ${TABLET_WIDTH}px) {
 		width: 25%;
 
 		// "Halo" effect
@@ -192,7 +192,7 @@ export const Menu = styled.div`
 	transition-duration: 200ms;
 	transition-timing-function: ease-in;
 
-	@media (min-width: 700px) {
+	@media (min-width: ${TABLET_WIDTH}px) {
 		background-color: transparent;
 		z-index: 111;
 

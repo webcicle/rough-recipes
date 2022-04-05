@@ -1,6 +1,11 @@
 import { createGlobalStyle, css } from 'styled-components';
+import { TABLET_WIDTH } from '../constants/screen-sizes';
 
 const styles = css`
+	:root {
+		--image-border-radius: 0.6rem;
+	}
+
 	*,
 	*::before,
 	*::after {
