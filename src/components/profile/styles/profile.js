@@ -21,13 +21,13 @@ export const Container = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 
-	@media (max-width: ${TABLET_WIDTH}px) {
+	@media (max-width: ${TABLET_WIDTH}px) and (min-width: ${DESKTOP_WIDTH}px) {
 		margin-top: 2rem;
 		min-height: 225px;
 	}
+
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		margin-top: 2.5rem;
-		min-height: 225px;
 	}
 `;
 

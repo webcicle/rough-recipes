@@ -1,5 +1,5 @@
 import ContentContainer from '../containers/content';
-import Profile from '../components/profile';
+import { Profile } from '../components';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
