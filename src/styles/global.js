@@ -4,6 +4,7 @@ import { TABLET_WIDTH } from '../constants/screen-sizes';
 const styles = css`
 	:root {
 		--image-border-radius: 0.6rem;
+		--button-border-radius: 0.6rem;
 	}
 
 	*,

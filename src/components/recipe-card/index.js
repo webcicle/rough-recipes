@@ -9,14 +9,26 @@ import {
 import { StatusBar } from '../index';
 
 export default function RecipeCard(props) {
-	const { restProps, _id, title, author, synopsis, image, slug } = props.recipe;
+	const {
+		restProps,
+		_id,
+		title,
+		author,
+		synopsis,
+		image,
+		slug,
+		createdAt,
+		updatedAt,
+	} = props.recipe;
+
+	const statusProps = { author, createdAt, updatedAt };
 
 	return (
 		<RecipeCard.Container {...restProps}>
 			<RecipeCard.Image src={image} alt={slug} />
 			<RecipeCard.Bottom>
 				<RecipeCard.Title id={_id}>{title}</RecipeCard.Title>
-				<StatusBar author={author} />
+				<StatusBar shortBar statusProps={statusProps} author={author} />
 				<RecipeCard.Synopsis>{synopsis}</RecipeCard.Synopsis>
 			</RecipeCard.Bottom>
 		</RecipeCard.Container>

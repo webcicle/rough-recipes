@@ -21,13 +21,40 @@ const recipeSchema = mongoose.Schema(
 		},
 		image: {
 			type: String,
+			required: [true, 'Please add an image'],
 			trim: true,
 		},
 		slug: {
 			type: String,
-			required: [true, 'Please add a subtitle'],
+			required: [true, 'Please add a slug'],
 			trim: true,
-			unique: [true, 'Subtitle already exists'],
+		},
+		category: {
+			type: String,
+			required: [true, 'Please add a slug'],
+			trim: true,
+		},
+		tags: {
+			type: [String],
+			trim: true,
+		},
+		appearsIn: {
+			type: [Number],
+		},
+		synopsis: {
+			type: String,
+			required: [true, 'Please add a synopsis'],
+			trim: true,
+		},
+		instructions: {
+			type: [String],
+			required: [true, 'Please add instructions'],
+			trim: true,
+		},
+		ingredients: {
+			type: [String],
+			required: [true, 'Please add ingredients'],
+			trim: true,
 		},
 	},
 	{ timestamps: true }

@@ -6,10 +6,10 @@ const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 const Main = styled.main`
 	width: 100%;
 	margin: 0 auto;
-	margin-bottom: 2rem;
-	padding-top: 8rem;
+	margin-bottom: 8rem;
+	padding: 2rem 1.5em;
+	padding-bottom: 6rem;
 	background-color: var(--off-white-color);
-	padding: 1.5em;
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
 
 	// dynamic border radius, based on the component property 'direction'

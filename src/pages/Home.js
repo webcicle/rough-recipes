@@ -4,10 +4,11 @@ import RecipeCard from '../components/recipe-card';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { DESKTOP_WIDTH, TABLET_WIDTH } from '../constants/screen-sizes';
+import { RECIPES } from '../constants/routes';
 
 function Home() {
 	const [latestRecipes, setLatestRecipes] = useState([]);
-	const API_URL = '/api/recipes/';
+	const API_URL = '/api/recipes/latest';
 
 	const getRecipes = async () => {
 		try {
@@ -31,12 +32,15 @@ function Home() {
 
 	return (
 		<ContentContainer direction='up'>
-			<Latest.Title>Latest recipes</Latest.Title>
-			<Latest.Grid>
-				{latestRecipes.map((recipe) => {
-					return <RecipeCard key={recipe._id} recipe={recipe} />;
-				})}
-			</Latest.Grid>
+			<Latest.Container>
+				<Latest.Title>Latest recipes</Latest.Title>
+				<Latest.Grid>
+					{latestRecipes.map((recipe) => {
+						return <RecipeCard key={recipe._id} recipe={recipe} />;
+					})}
+				</Latest.Grid>
+				<Latest.Link to={RECIPES}>explore all</Latest.Link>
+			</Latest.Container>
 		</ContentContainer>
 	);
 }

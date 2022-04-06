@@ -5,21 +5,13 @@ import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
 export const Container = styled.div`
 	--margin-bottom: 0.5em;
 	margin-bottom: 2em;
-
-	display: grid;
-
-	&:nth-child(2),
-	&:nth-child(3),
-	&:nth-child(4),
-	&:nth-child(5) {
-		grid-template-rows: repeat(2, 12rem);
-		grid-template-areas: 'top' 'bottom';
-	}
+	display: flex;
+	flex-direction: column;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		&:first-child {
 			grid-area: Main;
-			align-self: stretch;
+			/* align-self: stretch; */
 
 			h2 {
 				font-size: var(--fs-step-3);
@@ -36,8 +28,8 @@ export const Container = styled.div`
 				font-size: var(--fs-step-1);
 			}
 			img {
-				max-height: 10rem;
-				grid-area: top;
+				/* max-height: 50%; */
+				/* grid-area: top; */
 			}
 		}
 
@@ -53,7 +45,8 @@ export const Container = styled.div`
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		&:first-child {
 			h2 {
-				font-size: var(--fs-step-2);
+				font-size: var(--fs-step-0);
+				margin-block: 2rem;
 			}
 
 			img {
@@ -66,11 +59,11 @@ export const Container = styled.div`
 		&:nth-child(4),
 		&:nth-child(5) {
 			h2 {
-				font-size: var(--fs-step-0);
+				font-size: var(--fs-step--2);
 			}
 			img {
+				min-height: 50%;
 				max-height: 10rem;
-				grid-area: top;
 			}
 			p {
 				font-size: 0.8rem;
@@ -117,7 +110,7 @@ export const Image = styled.img`
 
 export const Title = styled.h2`
 	font-family: var(--primary-font);
-	font-size: var(--fs-step-2);
+	font-size: var(--fs-step-1);
 	margin-bottom: var(--margin-bottom);
 `;
 

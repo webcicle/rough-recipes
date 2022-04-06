@@ -13,6 +13,14 @@ const addRecipe = asyncHandler(async (req, res) => {
 		title: req.body.title,
 		subtitle: req.body.subtitle,
 		author: req.body.author,
+		image: req.body.image,
+		slug: req.body.slug,
+		category: req.body.category,
+		tags: req.body.tags,
+		appearsIn: req.body.appearsIn,
+		synopsis: req.body.synopsis,
+		instructions: req.body.instructions,
+		ingredients: req.body.ingredients,
 	});
 
 	res.status(200).json({ message: 'Add new recipe', data: newRecipe });
@@ -55,4 +63,16 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 	});
 });
 
-module.exports = { findAllRecipes, addRecipe, editRecipe, deleteRecipe };
+const findLatestRecipes = asyncHandler(async (req, res) => {
+	const latest = await Recipes.find().limit(5).sort('-createdAt');
+
+	res.status(200).json({ message: 'Find latest recipes', data: latest });
+});
+
+module.exports = {
+	findAllRecipes,
+	addRecipe,
+	editRecipe,
+	deleteRecipe,
+	findLatestRecipes,
+};
