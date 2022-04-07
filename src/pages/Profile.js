@@ -28,13 +28,13 @@ export default function ProfilePage() {
 
 	const token = JSON.parse(localStorage.getItem('user')).token;
 
-	const config = {
+	const axiosConfig = {
 		headers: { Authorization: `Bearer ${token}` },
 	};
 
 	const changeEmail = async () => {
 		try {
-			await axios.put(API_URL, { email: inputData }, config);
+			await axios.put(API_URL, { email: inputData }, axiosConfig);
 			toast('Email updated', globalToastConfig);
 		} catch (error) {
 			toast.error('Cannot change email', globalToastConfig);
@@ -46,7 +46,7 @@ export default function ProfilePage() {
 
 	const changePassword = async () => {
 		try {
-			await axios.put(API_URL, { password: inputData }, config);
+			await axios.put(API_URL, { password: inputData }, axiosConfig);
 			toast('Password updated', globalToastConfig);
 		} catch (error) {
 			toast.error('Cannot change password', globalToastConfig);
@@ -58,7 +58,7 @@ export default function ProfilePage() {
 	};
 
 	const getUser = async () => {
-		const user = await axios.get(API_URL, config);
+		const user = await axios.get(API_URL, axiosConfig);
 		setUserData(user.data);
 	};
 
@@ -67,7 +67,7 @@ export default function ProfilePage() {
 	}, [editEmail]);
 
 	const handleChange = (e) => {
-		const { name, value } = e.target;
+		const { value } = e.target;
 		setInputData(value);
 	};
 

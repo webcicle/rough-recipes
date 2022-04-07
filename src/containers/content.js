@@ -61,7 +61,7 @@ const Main = styled.main`
 	}
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
-		max-width: ${DESKTOP_WIDTH}px;
+		max-width: ${DESKTOP_WIDTH - 100}px;
 	}
 `;
 

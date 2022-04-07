@@ -41,7 +41,7 @@ export default function HeaderContainer({ title }) {
 						onClick={() => linkClick(user ? ROUTES.PROFILE : ROUTES.LOGIN)}>
 						Profile Page
 					</Header.Link>
-					<Header.Link onClick={() => linkClick(ROUTES.RECIPES)}>
+					<Header.Link onClick={() => linkClick(ROUTES.ALL_RECIPES)}>
 						All Recipes
 					</Header.Link>
 				</Header.LinksContainer>

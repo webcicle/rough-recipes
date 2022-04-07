@@ -4,7 +4,7 @@ import RecipeCard from '../components/recipe-card';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { DESKTOP_WIDTH, TABLET_WIDTH } from '../constants/screen-sizes';
-import { RECIPES } from '../constants/routes';
+import { ALL_RECIPES } from '../constants/routes';
 
 function Home() {
 	const [latestRecipes, setLatestRecipes] = useState([]);
@@ -39,7 +39,7 @@ function Home() {
 						return <RecipeCard key={recipe._id} recipe={recipe} />;
 					})}
 				</Latest.Grid>
-				<Latest.Link to={RECIPES}>explore all</Latest.Link>
+				<Latest.Link to={ALL_RECIPES}>explore all</Latest.Link>
 			</Latest.Container>
 		</ContentContainer>
 	);

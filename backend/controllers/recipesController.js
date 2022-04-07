@@ -63,6 +63,16 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 	});
 });
 
+const findRecipe = asyncHandler(async (req, res) => {
+	const recipe = await Recipes.findById(req.params.id);
+
+	if (!recipe) {
+		res.status(404);
+		throw new Error('No such recipe');
+	}
+	res.status(200).json(recipe);
+});
+
 const findLatestRecipes = asyncHandler(async (req, res) => {
 	const latest = await Recipes.find().limit(5).sort('-createdAt');
 
@@ -75,4 +85,5 @@ module.exports = {
 	editRecipe,
 	deleteRecipe,
 	findLatestRecipes,
+	findRecipe,
 };
