@@ -3,4 +3,7 @@ export { default as Form } from './form';
 export { default as Profile } from './profile';
 export { default as Latest } from './latest';
 export { default as StatusBar } from './status-bar';
+export { default as AppearsIn } from './appears-in';
 export { default as RecipeCard } from './recipe-card';
+export { default as Recipe } from './recipe';
+export { default as TipsAndTricks } from './tips-and-tricks';

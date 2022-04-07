@@ -7,29 +7,30 @@ export default function StatusBar({
 	children,
 	...restProps
 }) {
-	const { author, createdAt, updatedAt } = statusProps;
-	const date = createdAt;
+	const { author, createdAt, updatedAt, category } = statusProps;
 	const formatDate = (date) => {
 		return date.split('T')[0];
 	};
 
 	return (
-		<Container {...restProps}>
-			<StatusBar.Post>
+		<Container shortBar={shortBar} {...restProps}>
+			<StatusBar.Post shortBar={shortBar}>
 				<StatusBar.Title>by:</StatusBar.Title>
 				<StatusBar.Value>{author}</StatusBar.Value>
 			</StatusBar.Post>
-			<StatusBar.Post>
+			<StatusBar.Post shortBar={shortBar}>
 				<StatusBar.Title>posted:</StatusBar.Title>
-				<StatusBar.Value>{formatDate(createdAt)}</StatusBar.Value>
+				<StatusBar.Value>{createdAt && formatDate(createdAt)}</StatusBar.Value>
 			</StatusBar.Post>
-			{!shortBar && (
-				<StatusBar.Post>
+			{shortBar === 'false' && (
+				<StatusBar.Post shortBar={shortBar}>
 					<StatusBar.Title>updated:</StatusBar.Title>
-					<StatusBar.Value>{formatDate(updatedAt)}</StatusBar.Value>
+					<StatusBar.Value>
+						{updatedAt && formatDate(updatedAt)}
+					</StatusBar.Value>
 				</StatusBar.Post>
 			)}
-			<StatusBar.Post>
+			<StatusBar.Post shortBar={shortBar}>
 				<StatusBar.Title>10 min</StatusBar.Title>
 				<StatusBar.Value>read</StatusBar.Value>
 			</StatusBar.Post>
@@ -42,8 +43,12 @@ StatusBar.Title = function StatusBarTitle({ children, ...restProps }) {
 	return <Title {...restProps}>{children}</Title>;
 };
 
-StatusBar.Post = function StatusBarPost({ children, ...restProps }) {
-	return <Post {...restProps}>{children}</Post>;
+StatusBar.Post = function StatusBarPost({ shortBar, children, ...restProps }) {
+	return (
+		<Post shortBar={shortBar} {...restProps}>
+			{children}
+		</Post>
+	);
 };
 
 StatusBar.Value = function StatusBarValue({ children, ...restProps }) {

@@ -42,7 +42,7 @@ const recipeSchema = mongoose.Schema(
 			type: [Number],
 		},
 		synopsis: {
-			type: String,
+			type: [String],
 			required: [true, 'Please add a synopsis'],
 			trim: true,
 		},

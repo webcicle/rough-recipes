@@ -28,8 +28,8 @@ export default function RecipeCard(props) {
 			<RecipeCard.Image src={image} alt={slug} />
 			<RecipeCard.Bottom>
 				<RecipeCard.Title id={_id}>{title}</RecipeCard.Title>
-				<StatusBar shortBar statusProps={statusProps} author={author} />
-				<RecipeCard.Synopsis>{synopsis}</RecipeCard.Synopsis>
+				<StatusBar shortBar='true' statusProps={statusProps} />
+				<RecipeCard.Synopsis>{synopsis[0]}</RecipeCard.Synopsis>
 			</RecipeCard.Bottom>
 		</RecipeCard.Container>
 	);
