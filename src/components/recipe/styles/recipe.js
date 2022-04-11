@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
 	margin-top: 1.5rem;
@@ -7,7 +8,10 @@ export const Container = styled.div`
 export const SynopsisContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		width: 50%;
+	}
 `;
 
 export const Title = styled.h1`
@@ -22,16 +26,26 @@ export const Subtitle = styled.h3`
 
 export const MainContent = styled.main`
 	display: flex;
+	flex-direction: column;
 	max-width: 100%;
 	column-gap: 1rem;
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		flex-direction: row;
+	}
 `;
 
 export const Image = styled.img`
-	width: 50%;
 	max-height: 100%;
 	object-fit: cover;
 	object-position: center;
 	border-radius: var(--image-border-radius);
+	margin-bottom: 1em;
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		width: 50%;
+		margin-bottom: 0;
+	}
 `;
 
 export const Synopsis = styled.p`

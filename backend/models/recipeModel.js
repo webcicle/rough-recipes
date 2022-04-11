@@ -1,5 +1,18 @@
 const mongoose = require('mongoose');
 
+const tipsSchema = mongoose.Schema({
+	title: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	content: {
+		type: [String],
+		required: true,
+		trim: true,
+	},
+});
+
 const recipeSchema = mongoose.Schema(
 	{
 		title: {
@@ -37,6 +50,14 @@ const recipeSchema = mongoose.Schema(
 		tags: {
 			type: [String],
 			trim: true,
+		},
+		tips1: {
+			type: tipsSchema,
+			required: true,
+		},
+		tips2: {
+			type: tipsSchema,
+			required: true,
 		},
 		appearsIn: {
 			type: [Number],

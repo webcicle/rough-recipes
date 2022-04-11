@@ -8,9 +8,12 @@ import { DESKTOP_WIDTH } from '../constants/screen-sizes';
 import { AppearsIn, StatusBar, Recipe, TipsAndTricks } from '../components';
 
 const GridContainer = styled.div`
-	@media (min-width: ${DESKTOP_WIDTH}px) {
+	@media (min-width: ${DESKTOP_WIDTH - 100}px) {
 		display: grid;
+		column-gap: 1.5rem;
 		grid-template-columns: 15% 1fr 15%;
+		max-width: ${DESKTOP_WIDTH}px;
+		margin-inline: auto;
 	}
 `;
 
@@ -18,6 +21,7 @@ export default function RecipePage(props) {
 	const { id } = useParams();
 	const API_URL = `/api/recipes/${id}`;
 	const [recipeData, setRecipeData] = useState({});
+	const [tipsTab, setTipsTab] = useState('left');
 
 	const fetchData = async () => {
 		const response = await axios.get(API_URL);
@@ -40,14 +44,16 @@ export default function RecipePage(props) {
 		createdAt,
 		updatedAt,
 		category,
+		tips1,
+		tips2,
 	} = recipeData;
 
 	const statusProps = { author, createdAt, updatedAt, category };
 
 	const appearsInArr =
 		appearsIn &&
-		appearsIn.map((tag) => {
-			return <AppearsIn.Tag key={_id}>{tag}</AppearsIn.Tag>;
+		appearsIn.map((tag, index) => {
+			return <AppearsIn.Tag key={index}>{tag}</AppearsIn.Tag>;
 		});
 
 	const synopsisArr =
@@ -55,6 +61,18 @@ export default function RecipePage(props) {
 		synopsis.map((par) => {
 			return <Recipe.Synopsis>{par}</Recipe.Synopsis>;
 		});
+
+	const tips1Arr = tips1
+		? tips1.content.map((tip) => {
+				return <li>{tip}</li>;
+		  })
+		: null;
+
+	const tips2Arr = tips2
+		? tips2.content.map((tip) => {
+				return <p>{tip}</p>;
+		  })
+		: null;
 
 	return (
 		<GridContainer>
@@ -74,7 +92,27 @@ export default function RecipePage(props) {
 						<Recipe.Image src={image} alt={slug} />
 						<Recipe.SynopsisContainer>{synopsisArr}</Recipe.SynopsisContainer>
 					</Recipe.MainContent>
-					<TipsAndTricks />
+					<TipsAndTricks>
+						<TipsAndTricks.Header>
+							<TipsAndTricks.Button
+								active={tipsTab === 'left' ? true : false}
+								onClick={() => setTipsTab('left')}>
+								{tips1 && tips1.title}
+							</TipsAndTricks.Button>
+							<TipsAndTricks.Button
+								active={tipsTab === 'right' ? true : false}
+								onClick={() => setTipsTab('right')}>
+								{tips2 && tips2.title}
+							</TipsAndTricks.Button>
+						</TipsAndTricks.Header>
+						<TipsAndTricks.Content>
+							{tipsTab === 'left' ? (
+								<TipsAndTricks.List>{tips1Arr}</TipsAndTricks.List>
+							) : (
+								tips2Arr
+							)}
+						</TipsAndTricks.Content>
+					</TipsAndTricks>
 				</Recipe>
 			</ContentContainer>
 			{window.innerWidth > DESKTOP_WIDTH && (

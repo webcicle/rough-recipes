@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 
 export const Container = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: ${(props) => (props.shortBar == 'false' ? '0.9em' : '0.4em')};
 `;
