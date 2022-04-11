@@ -7,9 +7,9 @@ export const Container = styled.div`
 	background-color: var(--passive-tab-color);
 	border-radius: var(--image-border-radius);
 
-	-webkit-box-shadow: 5px -4px 5px 0px rgba(196, 169, 86, 0.66);
-	-moz-box-shadow: 5px -4px 5px 0px rgba(196, 169, 86, 0.66);
-	box-shadow: 5px -4px 5px 0px rgba(196, 169, 86, 0.66);
+	-webkit-box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
+	-moz-box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
+	box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
 `;
 
 export const Header = styled.header`
@@ -46,42 +46,28 @@ export const Content = styled.div`
 	background-color: var(--active-tab-color);
 	height: fit-content;
 	min-height: 225px;
-	padding-bottom: 1rem;
+	padding-block: 1rem;
 	z-index: 20;
 	border-bottom-left-radius: var(--image-border-radius);
 	border-bottom-right-radius: var(--image-border-radius);
-
-	ul {
-		margin: 0;
-	}
-
-	li {
-		margin-block: 1em;
-		font-style: italic;
-		letter-spacing: 2px;
-	}
-
-	p {
-		padding-inline: 2em;
-	}
-
-	ul,
-	p {
-		padding-top: 2em;
-		font-family: var(--secondary-font);
-	}
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		min-height: 200px;
 	}
 `;
 
-export const List = styled.ul``;
+export const List = styled.ul`
+	font-family: var(--secondary-font);
+	margin: 0;
+`;
 
-export const ListItem = styled.li``;
+export const ListItem = styled.li`
+	margin-block: 0.9em;
+	font-style: italic;
+	letter-spacing: 2px;
+`;
 
-export const Text = styled.p``;
-
-{
-	/* <ul><li>Wash all your balls before cooking</li><li>Tattoo all of your carrots and never forget to dry them completely</li><li>Calm your husband with some whiskey</li><li>Give your doctor a call cus you will have seizure</li></ul>; */
-}
+export const Text = styled.p`
+	font-family: var(--secondary-font);
+	padding: 0.6em 2em;
+`;

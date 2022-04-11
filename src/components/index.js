@@ -7,3 +7,5 @@ export { default as AppearsIn } from './appears-in';
 export { default as RecipeCard } from './recipe-card';
 export { default as Recipe } from './recipe';
 export { default as TipsAndTricks } from './tips-and-tricks';
+export { default as GroceryList } from './grocery-list';
+export { default as Share } from './share';

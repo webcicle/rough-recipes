@@ -5,7 +5,15 @@ import ContentContainer from '../containers/content';
 import { SidebarContainer } from '../containers';
 import styled from 'styled-components/macro';
 import { DESKTOP_WIDTH } from '../constants/screen-sizes';
-import { AppearsIn, StatusBar, Recipe, TipsAndTricks } from '../components';
+import {
+	AppearsIn,
+	StatusBar,
+	Recipe,
+	TipsAndTricks,
+	GroceryList,
+	Share,
+} from '../components';
+// import FacebookIcon from '/images/icons/facebook-brands.svg';
 
 const GridContainer = styled.div`
 	@media (min-width: ${DESKTOP_WIDTH - 100}px) {
@@ -46,6 +54,7 @@ export default function RecipePage(props) {
 		category,
 		tips1,
 		tips2,
+		ingredients,
 	} = recipeData;
 
 	const statusProps = { author, createdAt, updatedAt, category };
@@ -56,6 +65,20 @@ export default function RecipePage(props) {
 			return <AppearsIn.Tag key={index}>{tag}</AppearsIn.Tag>;
 		});
 
+	const ingredientsArr =
+		ingredients &&
+		ingredients.map((ing, index) => {
+			return <GroceryList.ListItem key={index}>{ing}</GroceryList.ListItem>;
+		});
+
+	const ingredientsArr1 =
+		ingredientsArr &&
+		ingredientsArr.slice(0, Math.ceil(ingredientsArr.length / 2));
+
+	const ingredientsArr2 =
+		ingredientsArr &&
+		ingredientsArr.slice(Math.ceil(ingredientsArr.length / 2));
+
 	const synopsisArr =
 		synopsis &&
 		synopsis.map((par) => {
@@ -64,13 +87,13 @@ export default function RecipePage(props) {
 
 	const tips1Arr = tips1
 		? tips1.content.map((tip) => {
-				return <li>{tip}</li>;
+				return <TipsAndTricks.ListItem>{tip}</TipsAndTricks.ListItem>;
 		  })
 		: null;
 
 	const tips2Arr = tips2
 		? tips2.content.map((tip) => {
-				return <p>{tip}</p>;
+				return <TipsAndTricks.Text>{tip}</TipsAndTricks.Text>;
 		  })
 		: null;
 
@@ -114,6 +137,23 @@ export default function RecipePage(props) {
 						</TipsAndTricks.Content>
 					</TipsAndTricks>
 				</Recipe>
+				<SidebarContainer
+					direction={window.innerWidth < DESKTOP_WIDTH ? 'center' : 'left'}>
+					<GroceryList>
+						<GroceryList.Header>
+							<GroceryList.Title>Gorcery List</GroceryList.Title>
+							<Share>
+								<Share.Link
+									icon='/images/icons/socials/facebook-brands.svg'
+									href='#'></Share.Link>
+							</Share>
+						</GroceryList.Header>
+						<GroceryList.List>
+							<GroceryList.Split>{ingredientsArr1}</GroceryList.Split>
+							<GroceryList.Split>{ingredientsArr2}</GroceryList.Split>
+						</GroceryList.List>
+					</GroceryList>
+				</SidebarContainer>
 			</ContentContainer>
 			{window.innerWidth > DESKTOP_WIDTH && (
 				<SidebarContainer direction='right' />
