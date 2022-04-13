@@ -7,7 +7,6 @@ export default function Share({ children, ...restProps }) {
 Share.Link = function ShareLink({ icon, href, children, ...restProps }) {
 	return (
 		<Link href={href} {...restProps}>
-			<img src={icon} alt='Facebook' />
 			{children}
 		</Link>
 	);

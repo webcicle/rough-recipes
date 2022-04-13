@@ -12,7 +12,6 @@ export const Link = styled(RouterLink)`
 	left: 50%;
 	transform: translateX(-50%);
 	background-color: rgba(89, 217, 109, 0.62);
-	/* background-color: var(--primary-color); */
 	padding: 1em 1.5em;
 	font-family: var(--primary-font);
 	font-size: var(--fs-step--1);

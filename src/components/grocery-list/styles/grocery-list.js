@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro';
-import { TABLET_WIDTH } from '../../../constants/screen-sizes';
+import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
 	padding: 1em 2em;
 	margin-top: 3rem;
+	margin-bottom: 2rem;
 	width: 100%;
 `;
 export const List = styled.div`
@@ -13,10 +14,14 @@ export const List = styled.div`
 	margin-top: 2em;
 	display: grid;
 	font-size: 1rem;
-	justify-content: space-between;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		grid-template-columns: 1fr 1fr;
+		justify-content: space-between;
+	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		grid-template-columns: 1fr;
+		margin-top: 0;
 	}
 `;
 
@@ -25,7 +30,6 @@ export const Title = styled.h2`
 	letter-spacing: 3px;
 	display: inline-block;
 	text-align: center;
-	margin-top: 0.6em;
 	position: relative;
 
 	&::after {
@@ -38,6 +42,10 @@ export const Title = styled.h2`
 		left: 50%;
 		transform: translate(-50%);
 	}
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		align-self: center;
+	}
 `;
 
 export const Split = styled.ul`
@@ -45,6 +53,7 @@ export const Split = styled.ul`
 	padding: 0;
 	text-align: center;
 	margin-block: 0;
+	z-index: 222;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		text-align: left;
@@ -53,12 +62,22 @@ export const Split = styled.ul`
 			text-align: right;
 		}
 	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		&:last-child {
+			text-align: left;
+		}
+	}
 `;
 
 export const ListItem = styled.li`
 	font-family: var(--secondary-font);
 	margin-bottom: 0.9em;
 	font-size: 1.3em;
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: 1em;
+		}
+	}
 `;
 
 export const Header = styled.header`
@@ -69,5 +88,10 @@ export const Header = styled.header`
 	@media (min-width: ${TABLET_WIDTH}px) {
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
+	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		flex-direction: column;
+		justify-content: center;
 	}
 `;

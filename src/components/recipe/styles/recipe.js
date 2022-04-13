@@ -3,6 +3,7 @@ import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
 	margin-top: 1.5rem;
+	grid-area: b;
 `;
 
 export const SynopsisContainer = styled.div`

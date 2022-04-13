@@ -10,6 +10,10 @@ export const Container = styled.div`
 	-webkit-box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
 	-moz-box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
 	box-shadow: 5px 4px 5px 0px rgba(196, 169, 86, 0.66);
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		min-height: 350px;
+	}
 `;
 
 export const Header = styled.header`
@@ -51,8 +55,12 @@ export const Content = styled.div`
 	border-bottom-left-radius: var(--image-border-radius);
 	border-bottom-right-radius: var(--image-border-radius);
 
+	@media (max-width: ${TABLET_WIDTH}px) {
+		min-height: 350px;
+	}
+
 	@media (min-width: ${DESKTOP_WIDTH}px) {
-		min-height: 200px;
+		min-height: 230px;
 	}
 `;
 

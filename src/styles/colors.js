@@ -13,6 +13,7 @@ const theme = css`
 		--off-white-color: #f4f4f4;
 		--active-tab-color: #ffea2f;
 		--passive-tab-color: #c4c4c4;
+		--instructions-bg: #e6e6e6;
 	}
 	.dark-theme {
 		--primary-color: #17ecb9;

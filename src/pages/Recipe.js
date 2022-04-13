@@ -12,16 +12,34 @@ import {
 	TipsAndTricks,
 	GroceryList,
 	Share,
+	Instructions,
 } from '../components';
-// import FacebookIcon from '/images/icons/facebook-brands.svg';
+import {
+	FacebookShareButton,
+	TwitterShareButton,
+	TelegramShareButton,
+	EmailShareButton,
+	FacebookIcon,
+	TwitterIcon,
+	TelegramIcon,
+	EmailIcon,
+} from 'react-share';
 
 const GridContainer = styled.div`
-	@media (min-width: ${DESKTOP_WIDTH - 100}px) {
+	@media (min-width: ${DESKTOP_WIDTH - 50}px) {
 		display: grid;
 		column-gap: 1.5rem;
-		grid-template-columns: 15% 1fr 15%;
-		max-width: ${DESKTOP_WIDTH}px;
+		grid-template-columns: 15% 1fr 10%;
+		max-width: 1100px;
+		grid-template-rows: repeat(3, fit-content);
+		row-gap: 1.5rem;
 		margin-inline: auto;
+		grid-template-areas: 'a b c' 'a e c' 'f f f';
+	}
+
+	@media (min-width: ${DESKTOP_WIDTH + 200}px) {
+		grid-template-columns: 18% 1fr 18%;
+		max-width: 1300px;
 	}
 `;
 
@@ -55,6 +73,7 @@ export default function RecipePage(props) {
 		tips1,
 		tips2,
 		ingredients,
+		instructions,
 	} = recipeData;
 
 	const statusProps = { author, createdAt, updatedAt, category };
@@ -97,12 +116,11 @@ export default function RecipePage(props) {
 		  })
 		: null;
 
+	const shareTitle = title + ' Gorcery List';
+
 	return (
 		<GridContainer>
-			{window.innerWidth > DESKTOP_WIDTH && (
-				<SidebarContainer direction='left' />
-			)}
-			<ContentContainer direction='up'>
+			<ContentContainer order='1' area='b' direction='up'>
 				<Recipe>
 					<AppearsIn>
 						<AppearsIn.Title>AppearsIn: </AppearsIn.Title>
@@ -137,26 +155,43 @@ export default function RecipePage(props) {
 						</TipsAndTricks.Content>
 					</TipsAndTricks>
 				</Recipe>
-				<SidebarContainer
-					direction={window.innerWidth < DESKTOP_WIDTH ? 'center' : 'left'}>
-					<GroceryList>
-						<GroceryList.Header>
-							<GroceryList.Title>Gorcery List</GroceryList.Title>
-							<Share>
-								<Share.Link
-									icon='/images/icons/socials/facebook-brands.svg'
-									href='#'></Share.Link>
-							</Share>
-						</GroceryList.Header>
-						<GroceryList.List>
-							<GroceryList.Split>{ingredientsArr1}</GroceryList.Split>
-							<GroceryList.Split>{ingredientsArr2}</GroceryList.Split>
-						</GroceryList.List>
-					</GroceryList>
-				</SidebarContainer>
+			</ContentContainer>
+			<SidebarContainer
+				direction={window.innerWidth < DESKTOP_WIDTH ? 'center' : 'left'}
+				area='a'>
+				<GroceryList>
+					<GroceryList.Header>
+						<GroceryList.Title>Gorcery List</GroceryList.Title>
+						<Share>
+							<FacebookShareButton
+								url={window.location.href}
+								quote={shareTitle}>
+								<FacebookIcon />
+							</FacebookShareButton>
+							<TwitterShareButton url={window.location.href} title={shareTitle}>
+								<TwitterIcon />
+							</TwitterShareButton>
+							<TelegramShareButton
+								url={window.location.href}
+								title={shareTitle}>
+								<TelegramIcon />
+							</TelegramShareButton>
+							<EmailShareButton url={window.location.href} subject={shareTitle}>
+								<EmailIcon />
+							</EmailShareButton>
+						</Share>
+					</GroceryList.Header>
+					<GroceryList.List>
+						<GroceryList.Split>{ingredientsArr1}</GroceryList.Split>
+						<GroceryList.Split>{ingredientsArr2}</GroceryList.Split>
+					</GroceryList.List>
+				</GroceryList>
+			</SidebarContainer>
+			<ContentContainer order='2' area='e' direction='center'>
+				<Instructions instructions={instructions} />
 			</ContentContainer>
 			{window.innerWidth > DESKTOP_WIDTH && (
-				<SidebarContainer direction='right' />
+				<SidebarContainer area='c' direction='right' />
 			)}
 		</GridContainer>
 	);
