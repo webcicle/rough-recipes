@@ -27,7 +27,7 @@ export default function RecipeCard(props) {
 		<RecipeCard.Container {...restProps}>
 			<RecipeCard.Image src={image} alt={slug} />
 			<RecipeCard.Bottom>
-				<RecipeCard.Title id={_id}>{title}</RecipeCard.Title>
+				<RecipeCard.Title slug={slug}>{title}</RecipeCard.Title>
 				<StatusBar shortBar='true' statusProps={statusProps} />
 				<RecipeCard.Synopsis>{synopsis[0]}</RecipeCard.Synopsis>
 			</RecipeCard.Bottom>
@@ -46,9 +46,9 @@ RecipeCard.Bottom = function RecipeCardBottom({ children, ...restProps }) {
 	return <Bottom {...restProps}>{children}</Bottom>;
 };
 
-RecipeCard.Title = function RecipeCardTitle({ id, children, ...restProps }) {
+RecipeCard.Title = function RecipeCardTitle({ slug, children, ...restProps }) {
 	return (
-		<Link to={`/recipes/${id}`}>
+		<Link to={`/recipes/${slug}`}>
 			<Title {...restProps}>{children}</Title>
 		</Link>
 	);

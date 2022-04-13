@@ -64,7 +64,8 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 });
 
 const findRecipe = asyncHandler(async (req, res) => {
-	const recipe = await Recipes.findById(req.params.id);
+	// const recipe = await Recipes.findById(req.params.id);
+	const recipe = await Recipes.findOne({ slug: req.params.slug });
 
 	if (!recipe) {
 		res.status(404);

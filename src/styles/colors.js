@@ -13,12 +13,13 @@ const theme = css`
 		--link-color: #c7c7c7;
 		--off-white-color: #f4f4f4;
 		/* --active-tab-color: #ffea2f; */
-		--active-tab-color: var(--title-color-yellow);
+		--active-tab-color: #f4d06d;
 		/* --passive-tab-color: #c4c4c4; */
 		--passive-tab-color: var(--grey-color);
 		--instructions-bg: #e6e6e6;
 		/* --title-color-yellow: #ff8700; */ // old "yellow"
-		--title-color-yellow: #d88f2b;
+		/* --title-color-yellow: #d88f2b; */
+		--title-color-yellow: #e9bb3f;
 	}
 	.dark-theme {
 		--primary-color: #17ecb9;

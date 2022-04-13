@@ -8,7 +8,7 @@ import {
 	AllRecipes,
 	Recipe,
 } from './pages';
-import { HeaderContainer } from './containers';
+import { HeaderContainer, Wrapper } from './containers';
 import { ToastContainer } from 'react-toastify';
 import * as ROUTES from './constants/routes';
 
@@ -17,16 +17,18 @@ export default function App() {
 		<>
 			<div className='App light-theme'>
 				<HeaderContainer />
-				<Routes>
-					<Route path={ROUTES.HOME} element={<Home />} />
-					<Route path={ROUTES.LOGIN} element={<Login />} />
-					<Route path={ROUTES.REGISTER} element={<Register />} />
-					<Route path={ROUTES.ALL_RECIPES} element={<AllRecipes />} />
-					<Route path={ROUTES.RECIPE} element={<Recipe />} />
-					<Route path={ROUTES.ARTICLES} element={<Articles />} />
+				<Wrapper>
+					<Routes>
+						<Route path={ROUTES.HOME} element={<Home />} />
+						<Route path={ROUTES.LOGIN} element={<Login />} />
+						<Route path={ROUTES.REGISTER} element={<Register />} />
+						<Route path={ROUTES.ALL_RECIPES} element={<AllRecipes />} />
+						<Route path={ROUTES.RECIPE} element={<Recipe />} />
+						<Route path={ROUTES.ARTICLES} element={<Articles />} />
 
-					<Route path={ROUTES.PROFILE} element={<Profile />} />
-				</Routes>
+						<Route path={ROUTES.PROFILE} element={<Profile />} />
+					</Routes>
+				</Wrapper>
 				<ToastContainer />
 			</div>
 		</>

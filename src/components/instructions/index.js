@@ -9,7 +9,6 @@ import { useState } from 'react';
 
 export default function Instructions({ instructions, children, ...restProps }) {
 	const [slideIndex, setSlideIndex] = useState(0);
-	console.log(slideIndex);
 
 	const incrementSlides = () => {
 		if (slideIndex >= instructions.length - 1)
@@ -25,7 +24,6 @@ export default function Instructions({ instructions, children, ...restProps }) {
 	const instructionsArr =
 		instructions &&
 		instructions.map((inst, index) => {
-			let revIndex = instructions.length - index;
 			return (
 				<Slide key={index} id={index} slideIndex={slideIndex} {...restProps}>
 					<div>
@@ -50,27 +48,6 @@ export default function Instructions({ instructions, children, ...restProps }) {
 		</>
 	);
 }
-
-// Instructions.Slide = function InstructionsSlide({
-// 	instructions,
-// 	numb,
-// 	children,
-// 	...restProps
-// }) {
-// 	return (
-
-// 	);
-// };
-
-// Instructions.Button = function InstructionsButton({
-// 	handleClick,
-// 	children,
-// 	...restProps
-// }) {
-// 	return (
-
-// 	);
-// };
 
 Instructions.Inner = function InstructionsInner({ children, ...restProps }) {
 	return <Inner {...restProps}>{children}</Inner>;

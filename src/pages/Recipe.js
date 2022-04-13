@@ -77,8 +77,6 @@ export default function RecipePage(props) {
 		facts,
 	} = recipeData;
 
-	console.log(recipeData, facts);
-
 	const statusProps = { author, createdAt, updatedAt, category };
 
 	const appearsInArr =

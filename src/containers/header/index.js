@@ -17,17 +17,23 @@ export default function HeaderContainer({ title }) {
 		navigate(to, location.search);
 	};
 
+	const openMenu = () => {
+		setMenuOpen((prev) => !prev);
+	};
+
+	const headerText = window.location.href.split('/')[3];
+
 	return (
 		<Header>
 			<Header.Container>
 				{window.innerWidth > DESKTOP_WIDTH && (
-					<Header.Text>recipes</Header.Text>
+					<Header.Text>{headerText}</Header.Text>
 				)}
 			</Header.Container>
 			<Header.Logo
 				src='/images/logo-main.png'
 				menuOpen={menuOpen}
-				onClick={() => setMenuOpen((prev) => !prev)}
+				onClick={() => openMenu()}
 			/>
 			<Header.Menu menuOpen={menuOpen} onClick={() => setMenuOpen(false)}>
 				<Header.LinksContainer>
