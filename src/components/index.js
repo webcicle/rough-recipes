@@ -10,3 +10,4 @@ export { default as TipsAndTricks } from './tips-and-tricks';
 export { default as GroceryList } from './grocery-list';
 export { default as Share } from './share';
 export { default as Instructions } from './instructions';
+export { default as RecipeFacts } from './recipe-facts';

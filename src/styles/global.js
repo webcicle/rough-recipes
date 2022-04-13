@@ -19,6 +19,20 @@ const styles = css`
 	h4,
 	h5,
 	h6,
+	p,
+	ul,
+	li,
+	a,
+	button {
+		color: var(--dark-grey-color);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
 	p {
 		margin: 0;
 		padding: 0;
@@ -26,6 +40,7 @@ const styles = css`
 
 	h1 {
 		font-family: var(--primary-font);
+		fill: var(--dark-grey-color);
 	}
 
 	h2,
@@ -37,6 +52,7 @@ const styles = css`
 
 	body {
 		background-color: var(--main-bg-color);
+		color: var(--dark-grey-color);
 	}
 `;
 

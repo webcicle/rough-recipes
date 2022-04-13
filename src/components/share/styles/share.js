@@ -3,6 +3,7 @@ import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
 	display: flex;
+	justify-content: space-between;
 	margin-bottom: 0;
 	margin-top: 1rem;
 
@@ -18,6 +19,10 @@ export const Container = styled.div`
 	}
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		margin-block: 1em;
+	}
+
+	@media (min-width: 1200px) {
+		width: 85%;
 	}
 
 	@media (max-width: ${DESKTOP_WIDTH}px) {

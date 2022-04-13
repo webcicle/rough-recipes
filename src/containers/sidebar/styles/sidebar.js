@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
-import { DESKTOP_WIDTH } from '../constants/screen-sizes';
+import { DESKTOP_WIDTH } from '../../../constants/screen-sizes';
 
-const Container = styled.aside`
+export const Container = styled.aside`
 	background-color: var(--off-white-color);
 	grid-area: ${({ area }) => (area ? area : null)};
 
@@ -27,11 +27,3 @@ const Container = styled.aside`
 		}
 	}
 `;
-
-export default function Sidebar({ direction, children, ...restProps }) {
-	return (
-		<Container direction={direction} {...restProps}>
-			{children}
-		</Container>
-	);
-}

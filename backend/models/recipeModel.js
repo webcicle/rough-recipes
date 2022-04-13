@@ -13,6 +13,16 @@ const tipsSchema = mongoose.Schema({
 	},
 });
 
+const factsSchema = mongoose.Schema({
+	calories: { type: Number, required: true, trim: true },
+	protein: { type: Number, required: true, trim: true },
+	carbs: { type: Number, required: true, trim: true },
+	fat: { type: Number, required: true, trim: true },
+	activeTime: { type: Number, required: true, trim: true },
+	totalTime: { type: Number, required: true, trim: true },
+	servings: { type: Number, required: true, trim: true },
+});
+
 const recipeSchema = mongoose.Schema(
 	{
 		title: {
@@ -76,6 +86,10 @@ const recipeSchema = mongoose.Schema(
 			type: [String],
 			required: [true, 'Please add ingredients'],
 			trim: true,
+		},
+		facts: {
+			type: factsSchema,
+			required: true,
 		},
 	},
 	{ timestamps: true }

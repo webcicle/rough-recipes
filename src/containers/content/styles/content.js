@@ -1,15 +1,14 @@
 import styled from 'styled-components/macro';
-import * as SCREEN_SIZES from '../constants/screen-sizes.js';
+import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
 
-const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
-
-const Main = styled.main`
+export const Main = styled.main`
 	width: 100%;
 	margin: 0 auto;
 	padding: 2rem 1.5em;
 	background-color: var(--off-white-color);
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
 	overflow-y: hidden;
+	z-index: 1;
 
 	// dynamic border radius, based on the component property 'direction'
 	// can be set to 'up' – border at the bottom, 'down' - border at the top, and 'center' - all around.
@@ -36,19 +35,19 @@ const Main = styled.main`
 		position: relative;
 		margin-bottom: 3rem;
 
-		&::before {
+		&::after {
 			content: '';
 			width: 100%;
 			height: 100%;
 			position: absolute;
 			background-color: inherit;
-			top: 27px;
+			top: -12px;
 			left: 0;
-			z-index: -5;
+			z-index: -20;
 			border-radius: inherit;
 			box-shadow: inherit;
 
-			--radius: 25px;
+			--radius: 45px;
 			${(props) =>
 				props.direction === 'down' &&
 				'border-radius: var(--radius) var(--radius) var(--radius) var(--radius)'};
@@ -68,14 +67,24 @@ const Main = styled.main`
 	}
 `;
 
-export default function ContentContainer({
-	direction,
-	children,
-	...restProps
-}) {
-	return (
-		<Main direction={direction} {...restProps}>
-			{children}
-		</Main>
-	);
-}
+export const Title = styled.h2`
+	font-size: 1.8rem;
+	margin-bottom: 0.4em;
+	position: relative;
+	color: var(--dark-grey-color);
+
+	&::after {
+		content: '';
+		width: max-content;
+		position: absolute;
+		bottom: -0.3em;
+		background-color: black;
+		height: 3px;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		padding-left: 2rem;
+	}
+`;

@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { Header } from '../components';
+import { Header } from '../../components';
 import { useNavigate, useLocation } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
+import * as ROUTES from '../../constants/routes';
 import { useSelector } from 'react-redux';
-
-// const { Text, Button, Logo, Menu, LinksContainer, Link } = Header;
+import { DESKTOP_WIDTH } from '../../constants/screen-sizes';
 
 export default function HeaderContainer({ title }) {
-	const screenSize = 200;
 	const overlayImage = '/images/desktop-hover-overlay-home.png';
 	const [menuOpen, setMenuOpen] = useState(false);
 	const navigate = useNavigate();
@@ -22,8 +20,9 @@ export default function HeaderContainer({ title }) {
 	return (
 		<Header>
 			<Header.Container>
-				{screenSize > 1200 && <Header.Text>recipes</Header.Text>}
-				{/* <Header.Button icon='/images/icons/edit-list.png' /> */}
+				{window.innerWidth > DESKTOP_WIDTH && (
+					<Header.Text>recipes</Header.Text>
+				)}
 			</Header.Container>
 			<Header.Logo
 				src='/images/logo-main.png'

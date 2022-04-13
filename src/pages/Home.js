@@ -1,4 +1,4 @@
-import ContentContainer from '../containers/content';
+import { ContentContainer } from '../containers';
 import { Latest } from '../components';
 import RecipeCard from '../components/recipe-card';
 import axios from 'axios';

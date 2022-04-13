@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ContentContainer from '../containers/content';
-import { SidebarContainer } from '../containers';
+import { ContentContainer, SidebarContainer } from '../containers';
 import styled from 'styled-components/macro';
 import { DESKTOP_WIDTH } from '../constants/screen-sizes';
 import {
@@ -13,6 +12,7 @@ import {
 	GroceryList,
 	Share,
 	Instructions,
+	RecipeFacts,
 } from '../components';
 import {
 	FacebookShareButton,
@@ -74,7 +74,10 @@ export default function RecipePage(props) {
 		tips2,
 		ingredients,
 		instructions,
+		facts,
 	} = recipeData;
+
+	console.log(recipeData, facts);
 
 	const statusProps = { author, createdAt, updatedAt, category };
 
@@ -188,7 +191,10 @@ export default function RecipePage(props) {
 				</GroceryList>
 			</SidebarContainer>
 			<ContentContainer order='2' area='e' direction='center'>
+				<ContentContainer.Title>Instructions</ContentContainer.Title>
 				<Instructions instructions={instructions} />
+				<ContentContainer.Title>Recipe facts</ContentContainer.Title>
+				<RecipeFacts facts={recipeData.facts} />
 			</ContentContainer>
 			{window.innerWidth > DESKTOP_WIDTH && (
 				<SidebarContainer area='c' direction='right' />
