@@ -71,7 +71,6 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async (req, res) => {
 	const { id } = req.user;
 	const me = await User.findById(id);
-	console.log(me);
 	if (me) {
 		const { username, email } = me;
 
@@ -87,7 +86,6 @@ const getMe = asyncHandler(async (req, res) => {
 
 const editUser = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
-	console.log(req.body.password, req.body.email);
 	const hashedPassword = password && (await passwordHasher(password));
 
 	let user;

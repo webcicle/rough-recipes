@@ -24,6 +24,7 @@ import {
 	TelegramIcon,
 	EmailIcon,
 } from 'react-share';
+import useRecipe from '../hooks/useRecipe';
 
 const GridContainer = styled.div`
 	@media (min-width: ${DESKTOP_WIDTH - 50}px) {
@@ -77,45 +78,26 @@ export default function RecipePage(props) {
 		facts,
 	} = recipeData;
 
+	const {
+		createAppearsInArr,
+		createIngredientsArr,
+		createSynopsisArr,
+		createTipsArr1,
+		createTipsArr2,
+	} = useRecipe();
+
 	const statusProps = { author, createdAt, updatedAt, category };
 
-	const appearsInArr =
-		appearsIn &&
-		appearsIn.map((tag, index) => {
-			return <AppearsIn.Tag key={index}>{tag}</AppearsIn.Tag>;
-		});
-
-	const ingredientsArr =
-		ingredients &&
-		ingredients.map((ing, index) => {
-			return <GroceryList.ListItem key={index}>{ing}</GroceryList.ListItem>;
-		});
-
+	const ingredientsArr = ingredients && createIngredientsArr(ingredients);
 	const ingredientsArr1 =
 		ingredientsArr &&
 		ingredientsArr.slice(0, Math.ceil(ingredientsArr.length / 2));
-
 	const ingredientsArr2 =
 		ingredientsArr &&
 		ingredientsArr.slice(Math.ceil(ingredientsArr.length / 2));
 
-	const synopsisArr =
-		synopsis &&
-		synopsis.map((par) => {
-			return <Recipe.Synopsis>{par}</Recipe.Synopsis>;
-		});
-
-	const tips1Arr = tips1
-		? tips1.content.map((tip) => {
-				return <TipsAndTricks.ListItem>{tip}</TipsAndTricks.ListItem>;
-		  })
-		: null;
-
-	const tips2Arr = tips2
-		? tips2.content.map((tip) => {
-				return <TipsAndTricks.Text>{tip}</TipsAndTricks.Text>;
-		  })
-		: null;
+	const tips1Arr = tips1 && createTipsArr1(tips1);
+	const tips2Arr = tips2 && createTipsArr2(tips2);
 
 	const shareTitle = title + ' Gorcery List';
 
@@ -125,14 +107,18 @@ export default function RecipePage(props) {
 				<Recipe>
 					<AppearsIn>
 						<AppearsIn.Title>AppearsIn: </AppearsIn.Title>
-						<AppearsIn.TagsContainer>{appearsInArr}</AppearsIn.TagsContainer>
+						<AppearsIn.TagsContainer>
+							{appearsIn && createAppearsInArr(appearsIn)}
+						</AppearsIn.TagsContainer>
 					</AppearsIn>
 					<Recipe.Title>{title}</Recipe.Title>
 					<Recipe.Subtitle>{subtitle}</Recipe.Subtitle>
 					<StatusBar shortBar='false' statusProps={statusProps} />
 					<Recipe.MainContent>
 						<Recipe.Image src={image} alt={slug} />
-						<Recipe.SynopsisContainer>{synopsisArr}</Recipe.SynopsisContainer>
+						<Recipe.SynopsisContainer>
+							{synopsis && createSynopsisArr(synopsis)}
+						</Recipe.SynopsisContainer>
 					</Recipe.MainContent>
 					<TipsAndTricks>
 						<TipsAndTricks.Header>
