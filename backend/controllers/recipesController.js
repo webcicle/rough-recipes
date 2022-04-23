@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const Recipes = require('../models/recipeModel');
 
 const findAllRecipes = asyncHandler(async (req, res) => {
-	const allRecipes = await Recipes.find();
-
-	res.status(200).json({ message: 'Find all recipes', data: allRecipes });
+	res.status(200).json(res.paginatedResults);
 });
 
 const addRecipe = asyncHandler(async (req, res) => {
