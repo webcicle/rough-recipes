@@ -16,22 +16,22 @@ export default function useRecipe() {
 	};
 
 	const createSynopsisArr = (arr) => {
-		const synopsisArr = arr.map((par) => {
-			return <Recipe.Synopsis>{par}</Recipe.Synopsis>;
+		const synopsisArr = arr.map((par, index) => {
+			return <Recipe.Synopsis key={index}>{par}</Recipe.Synopsis>;
 		});
 		return synopsisArr;
 	};
 
 	const createTipsArr1 = (tips1) => {
-		const tips1Arr = tips1.content.map((tip) => {
-			return <TipsAndTricks.ListItem>{tip}</TipsAndTricks.ListItem>;
+		const tips1Arr = tips1.content.map((tip, index) => {
+			return <TipsAndTricks.ListItem key={index}>{tip}</TipsAndTricks.ListItem>;
 		});
 
 		return tips1Arr;
 	};
 	const createTipsArr2 = (tips2) => {
-		const tips2Arr = tips2.content.map((tip) => {
-			return <TipsAndTricks.ListItem>{tip}</TipsAndTricks.ListItem>;
+		const tips2Arr = tips2.content.map((tip, index) => {
+			return <TipsAndTricks.Text key={index}>{tip}</TipsAndTricks.Text>;
 		});
 
 		return tips2Arr;

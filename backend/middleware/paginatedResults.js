@@ -25,6 +25,8 @@ const paginatedResults = (model) => {
 			};
 		}
 
+		result.total = Math.ceil((await model.countDocuments().exec()) / limit);
+
 		try {
 			result.results = await model.find().limit(limit).skip(startIndex).exec();
 			res.paginatedResults = result;

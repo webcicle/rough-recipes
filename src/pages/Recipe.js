@@ -101,6 +101,8 @@ export default function RecipePage(props) {
 
 	const shareTitle = title + ' Gorcery List';
 
+	console.log(tips1Arr);
+
 	return (
 		<GridContainer>
 			<ContentContainer order='1' area='b' direction='up'>

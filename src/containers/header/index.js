@@ -21,7 +21,8 @@ export default function HeaderContainer({ title }) {
 		setMenuOpen((prev) => !prev);
 	};
 
-	const headerText = window.location.href.split('/')[3];
+	let headerText = window.location.href.split('/')[3];
+	headerText = headerText.split('?')[0];
 
 	return (
 		<Header>

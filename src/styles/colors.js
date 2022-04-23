@@ -4,6 +4,7 @@ const theme = css`
 	:root,
 	.light-theme {
 		--primary-color: #17ecb9;
+		--primary-color-light: rgba(89, 217, 109, 0.62);
 		--secondary-color: #eec584;
 		--secondary-color-dark: #eec584;
 		--main-bg-color: #c8ebed;

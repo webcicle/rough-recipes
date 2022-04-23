@@ -9,6 +9,7 @@ export const Main = styled.main`
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
 	overflow-y: hidden;
 	z-index: 1;
+	min-height: ${({ minHeight }) => minHeight && 'calc(100vh - 8rem)'};
 
 	// dynamic border radius, based on the component property 'direction'
 	// can be set to 'up' – border at the bottom, 'down' - border at the top, and 'center' - all around.
@@ -34,6 +35,9 @@ export const Main = styled.main`
 	@media (min-width: ${TABLET_WIDTH}px) and (max-width: ${DESKTOP_WIDTH}px) {
 		position: relative;
 		margin-bottom: 3rem;
+		/* added these two lines for the recipe page, in case something fucks up */
+		display: flex;
+		flex-direction: column;
 
 		&::after {
 			content: '';
