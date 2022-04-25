@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { latestRecipes } from './features/latest-recipes/latestRecipesSlice';
 import {
 	Articles,
 	Home,
@@ -13,6 +16,12 @@ import { ToastContainer } from 'react-toastify';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		// getRecipes();
+		dispatch(latestRecipes());
+	}, []);
+
 	return (
 		<>
 			<div className='App light-theme'>

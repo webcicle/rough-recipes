@@ -5,6 +5,7 @@ const styles = css`
 	:root {
 		--image-border-radius: 0.6rem;
 		--button-border-radius: 0.6rem;
+		--margin-bottom-page: 2rem;
 	}
 
 	*,

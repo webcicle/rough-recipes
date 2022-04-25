@@ -1,4 +1,4 @@
-import { Container, Title, Grid, Link } from './styles/latest';
+import { Container, Title, Subtitle, Grid, Link } from './styles/latest';
 
 export default function Latest({ children, ...restProps }) {
 	return <Container {...restProps}>{children}</Container>;
@@ -6,6 +6,10 @@ export default function Latest({ children, ...restProps }) {
 
 Latest.Title = function LatestTitle({ children, ...restProps }) {
 	return <Title {...restProps}>{children}</Title>;
+};
+
+Latest.Subtitle = function LatestSubtitle({ children, ...restProps }) {
+	return <Subtitle {...restProps}>{children}</Subtitle>;
 };
 
 Latest.Container = function LatestContainer({ children, ...restProps }) {

@@ -4,6 +4,7 @@ import { DESKTOP_WIDTH } from '../../../constants/screen-sizes';
 export const Container = styled.aside`
 	background-color: var(--off-white-color);
 	grid-area: ${({ area }) => (area ? area : null)};
+	margin-bottom: var(--margin-bottom-page);
 
 	--radius: 25px;
 	${(props) =>

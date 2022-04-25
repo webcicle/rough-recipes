@@ -25,11 +25,11 @@ export default function RecipeCard(props) {
 
 	return (
 		<RecipeCard.Container {...restProps}>
-			<RecipeCard.Image src={image} alt={slug} />
+			{image && <RecipeCard.Image src={image} alt={slug} />}
 			<RecipeCard.Bottom>
-				<RecipeCard.Title slug={slug}>{title}</RecipeCard.Title>
-				<StatusBar shortBar='true' statusProps={statusProps} />
-				<RecipeCard.Synopsis>{synopsis[0]}</RecipeCard.Synopsis>
+				{title && <RecipeCard.Title slug={slug}>{title}</RecipeCard.Title>}
+				{statusProps && <StatusBar shortBar='true' statusProps={statusProps} />}
+				{synopsis && <RecipeCard.Synopsis>{synopsis[0]}</RecipeCard.Synopsis>}
 			</RecipeCard.Bottom>
 		</RecipeCard.Container>
 	);

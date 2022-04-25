@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Recipes, PageSelector } from '../components';
-import { ContentContainer } from '../containers';
+import { Recipes, PageSelector, Latest, PreviewCard } from '../components';
+import {
+	ContentContainer,
+	GridContainer,
+	SidebarContainer,
+} from '../containers';
 import { useSearchParams } from 'react-router-dom';
 import { DESKTOP_WIDTH } from '../constants/screen-sizes';
 import * as ROUTES from '../constants/routes';
-// import chevronLeftIcon from '/images/icons/chevron-left.png';
+import { useSelector } from 'react-redux';
+import { ALL_RECIPES } from '../constants/routes';
 
 export default function AllRecipes() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -67,49 +72,71 @@ export default function AllRecipes() {
 		setQueryParams((prev) => ({ ...prev, page: id }));
 	};
 
-	console.log(queryParams.page);
-
 	const pageButtons = totalPages && createPageButtons();
-	console.log(pageButtons);
+
+	let { latest } = useSelector((state) => state.latest);
+	latest = [...latest];
+	latest.length = 3;
 
 	return (
 		<>
-			<ContentContainer minHeight='true' direction='up'>
-				<Recipes>
-					<Recipes.MainTitle>All recipes</Recipes.MainTitle>
-					<Recipes.Inner>
-						{recipes &&
-							recipes.map((recipe, index) => {
-								const { image, slug, title } = recipe;
+			<GridContainer>
+				<ContentContainer minHeight='true' direction='up'>
+					<Recipes>
+						<Recipes.MainTitle>All recipes</Recipes.MainTitle>
+						<Recipes.Inner>
+							{recipes &&
+								recipes.map((recipe, index) => {
+									const { image, slug, title } = recipe;
+									return (
+										<Recipes.Card
+											key={index}
+											src={image}
+											alt={slug}
+											title={title}
+											recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
+											articleUrl={`${ROUTES.ARTICLES}/${slug}`}
+										/>
+									);
+								})}
+						</Recipes.Inner>
+					</Recipes>
+					{totalPages > 1 && (
+						<PageSelector pages={totalPages}>
+							<PageSelector.PageSelectorDirection
+								id='left'
+								src={'/images/icons/chevron-left.png'}
+								onClick={decrementPageNumb}
+							/>
+							<PageSelector.NumberButtons>
+								{pageButtons ? pageButtons : null}
+							</PageSelector.NumberButtons>
+							<PageSelector.PageSelectorDirection
+								id='right'
+								src={'/images/icons/chevron-right.png'}
+								onClick={incrementPageNumb}
+							/>
+						</PageSelector>
+					)}
+				</ContentContainer>
+				<SidebarContainer columns={2} direction='right'>
+					<Latest.Subtitle align='center'>latest recipes</Latest.Subtitle>
+					<Latest.Container>
+						{latest &&
+							latest.map((rec) => {
 								return (
-									<Recipes.Card
-										key={index}
-										src={image}
-										alt={slug}
-										title={title}
-										recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
-										articleUrl={`${ROUTES.ARTICLES}/${slug}`}
+									<PreviewCard
+										key={rec._id}
+										image={rec.image}
+										title={rec.title}
+										slug={rec.slug}
+										to={`${ALL_RECIPES}/${rec.slug}`}
 									/>
 								);
 							})}
-					</Recipes.Inner>
-				</Recipes>
-				<PageSelector pages={totalPages}>
-					<PageSelector.PageSelectorDirection
-						id='left'
-						src={'/images/icons/chevron-left.png'}
-						onClick={decrementPageNumb}
-					/>
-					<PageSelector.NumberButtons>
-						{pageButtons ? pageButtons : null}
-					</PageSelector.NumberButtons>
-					<PageSelector.PageSelectorDirection
-						id='right'
-						src={'/images/icons/chevron-right.png'}
-						onClick={incrementPageNumb}
-					/>
-				</PageSelector>
-			</ContentContainer>
+					</Latest.Container>
+				</SidebarContainer>
+			</GridContainer>
 		</>
 	);
 }

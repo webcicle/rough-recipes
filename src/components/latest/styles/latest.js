@@ -48,6 +48,17 @@ export const Title = styled.h1`
 	}
 `;
 
+export const Subtitle = styled.h2`
+	font-family: var(--primary-font);
+	font-size: var(--fs-step--2);
+
+	letter-spacing: 6px;
+	line-height: 1.7rem;
+	text-align: ${({ align }) => (align === 'center' ? 'center' : 'left')};
+	margin-block: 1.5rem;
+	margin-inline: 1em;
+`;
+
 export const Grid = styled.div`
 	@media (min-width: ${TABLET_WIDTH}px) {
 		display: grid;

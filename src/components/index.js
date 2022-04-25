@@ -13,3 +13,4 @@ export { default as Instructions } from './instructions';
 export { default as RecipeFacts } from './recipe-facts';
 export { default as Recipes } from './recipes';
 export { default as PageSelector } from './page-selector';
+export { default as PreviewCard } from './preview-card';

@@ -1,9 +1,14 @@
 import styled from 'styled-components/macro';
-import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
+import {
+	DESKTOP_WIDTH,
+	LORG_WIDTH,
+	TABLET_WIDTH,
+} from '../../../constants/screen-sizes';
 
 export const Main = styled.main`
 	width: 100%;
 	margin: 0 auto;
+	margin-bottom: var(--margin-bottom-page);
 	padding: 2rem 1.5em;
 	background-color: var(--off-white-color);
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
@@ -66,7 +71,7 @@ export const Main = styled.main`
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		/* max-width: ${DESKTOP_WIDTH - 100}px; */ //old SETTING in case it fucks up
-		max-width: 1200px;
+		max-width: calc(${LORG_WIDTH}px - 4rem);
 		grid-area: ${({ area }) => area};
 	}
 `;
