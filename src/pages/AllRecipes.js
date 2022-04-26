@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Recipes, PageSelector, Latest, PreviewCard } from '../components';
+import {
+	Recipes,
+	PageSelector,
+	Latest,
+	PreviewCard,
+	Spinner,
+} from '../components';
 import {
 	ContentContainer,
 	GridContainer,
@@ -23,7 +29,7 @@ export default function AllRecipes() {
 	const [queryParams, setQueryParams] = useState({ page: 1, limit });
 
 	const [totalPages, setTotalPages] = useState(null);
-	const [recipes, setRecipes] = useState([]);
+	const [recipes, setRecipes] = useState(null);
 
 	const fetchRecipes = async () => {
 		const FETCH_URL = `/api/recipes?page=${queryParams.page}&limit=${queryParams.limit}`;
@@ -45,7 +51,7 @@ export default function AllRecipes() {
 	};
 
 	const decrementPageNumb = () => {
-		if (queryParams.page > 0) {
+		if (queryParams.page > 1) {
 			setQueryParams((prev) => ({ ...prev, page: prev.page - 1 }));
 		}
 		return;
@@ -75,32 +81,39 @@ export default function AllRecipes() {
 	const pageButtons = totalPages && createPageButtons();
 
 	let { latest } = useSelector((state) => state.latest);
-	latest = [...latest];
-	latest.length = 3;
+
+	if (latest) {
+		latest = [...latest];
+		latest.length = 3;
+	}
 
 	return (
 		<>
 			<GridContainer>
 				<ContentContainer minHeight='true' direction='up'>
-					<Recipes>
-						<Recipes.MainTitle>All recipes</Recipes.MainTitle>
-						<Recipes.Inner>
-							{recipes &&
-								recipes.map((recipe, index) => {
-									const { image, slug, title } = recipe;
-									return (
-										<Recipes.Card
-											key={index}
-											src={image}
-											alt={slug}
-											title={title}
-											recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
-											articleUrl={`${ROUTES.ARTICLES}/${slug}`}
-										/>
-									);
-								})}
-						</Recipes.Inner>
-					</Recipes>
+					{!recipes ? (
+						<Spinner />
+					) : (
+						<Recipes>
+							<Recipes.MainTitle>All recipes</Recipes.MainTitle>
+							<Recipes.Inner>
+								{recipes &&
+									recipes.map((recipe, index) => {
+										const { image, slug, title } = recipe;
+										return (
+											<Recipes.Card
+												key={index}
+												src={image}
+												alt={slug}
+												title={title}
+												recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
+												articleUrl={`${ROUTES.ARTICLES}/${slug}`}
+											/>
+										);
+									})}
+							</Recipes.Inner>
+						</Recipes>
+					)}
 					{totalPages > 1 && (
 						<PageSelector pages={totalPages}>
 							<PageSelector.PageSelectorDirection

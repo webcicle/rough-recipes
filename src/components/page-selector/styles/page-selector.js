@@ -20,7 +20,8 @@ export const PageSelectorNumb = styled.button`
 	background-color: var(--primary-color-light);
 	border-radius: 50%;
 	border: 0;
-	height: ${({ page, id }) => (page === id ? '5rem' : '3rem')};
+	height: ${({ page, id }) =>
+		page === id ? 'clamp(50px, 16vw, 70px)' : 'clamp(40px, 11vw, 60px)'};
 	aspect-ratio: 1;
 	font-family: var(--primary-font);
 	font-size: ${({ page, id }) =>

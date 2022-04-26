@@ -29,7 +29,9 @@ export default function RecipeCard(props) {
 			<RecipeCard.Bottom>
 				{title && <RecipeCard.Title slug={slug}>{title}</RecipeCard.Title>}
 				{statusProps && <StatusBar shortBar='true' statusProps={statusProps} />}
-				{synopsis && <RecipeCard.Synopsis>{synopsis[0]}</RecipeCard.Synopsis>}
+				{synopsis && (
+					<RecipeCard.Synopsis>{synopsis[0].slice(0, 120)}</RecipeCard.Synopsis>
+				)}
 			</RecipeCard.Bottom>
 		</RecipeCard.Container>
 	);

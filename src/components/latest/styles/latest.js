@@ -60,22 +60,23 @@ export const Subtitle = styled.h2`
 `;
 
 export const Grid = styled.div`
+	width: 100%;
+
 	@media (min-width: ${TABLET_WIDTH}px) {
 		display: grid;
-		gap: 2em;
+		gap: 1em;
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto auto;
+		grid-template-rows: repeat(2, auto);
 
 		grid-template-areas:
-			'Main Side1'
-			'Main Side2';
+			'Main1 Side1'
+			'Main2 Side2';
 	}
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
-		grid-template-columns: repeat(4, calc(25% - 2em));
+		gap: 0.2em 1.35em;
+		grid-template-columns: repeat(4, calc(25% - 1em));
 		grid-template-rows: repeat(2, 50%);
-		grid-template-areas:
-			'Main Main Side1 Side3'
-			'Main Main Side2 Side4';
+		grid-template-areas: 'Main Main Side1 Side2' 'Main Main Side3 Side4';
 	}
 `;
