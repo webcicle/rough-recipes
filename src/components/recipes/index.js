@@ -25,6 +25,7 @@ Recipes.Card = function RecipesCard({
 	src,
 	alt,
 	title,
+	shortTitle,
 	articleUrl,
 	recipeUrl,
 	children,
@@ -33,7 +34,7 @@ Recipes.Card = function RecipesCard({
 	return (
 		<Card {...restProps}>
 			<Image src={src} alt={alt} />
-			<Title>{title}</Title>
+			<Title>{shortTitle ? shortTitle : title}</Title>
 			<ButtonContainer>
 				<Link to={articleUrl}>Article</Link>
 				<Link to={recipeUrl}>Recipe</Link>

@@ -14,10 +14,10 @@ const tipsSchema = mongoose.Schema({
 });
 
 const factsSchema = mongoose.Schema({
-	calories: { type: Number, required: true, trim: true },
-	protein: { type: Number, required: true, trim: true },
-	carbs: { type: Number, required: true, trim: true },
-	fat: { type: Number, required: true, trim: true },
+	calories: { type: String, required: true, trim: true },
+	protein: { type: String, required: true, trim: true },
+	carbs: { type: String, required: true, trim: true },
+	fat: { type: String, required: true, trim: true },
 	activeTime: { type: Number, required: true, trim: true },
 	totalTime: { type: Number, required: true, trim: true },
 	servings: { type: Number, required: true, trim: true },
@@ -25,11 +25,17 @@ const factsSchema = mongoose.Schema({
 
 const recipeSchema = mongoose.Schema(
 	{
-		title: {
+		fullTitle: {
 			type: String,
 			required: [true, 'Please add a title'],
 			trim: true,
 			unique: [true, 'Title already exists'],
+		},
+		shortTitle: {
+			type: String,
+			required: [true, 'Please add a short title'],
+			trim: true,
+			unique: [true, 'Short title already exists'],
 		},
 		subtitle: {
 			type: String,
@@ -90,6 +96,19 @@ const recipeSchema = mongoose.Schema(
 		facts: {
 			type: factsSchema,
 			required: true,
+		},
+		wordCount: {
+			type: Number,
+			required: true,
+		},
+		createdAt: {
+			type: Date,
+		},
+		updatedAt: {
+			type: Date,
+		},
+		__v: {
+			type: Number,
 		},
 	},
 	{ timestamps: true }

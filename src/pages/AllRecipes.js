@@ -99,13 +99,14 @@ export default function AllRecipes() {
 							<Recipes.Inner>
 								{recipes &&
 									recipes.map((recipe, index) => {
-										const { image, slug, title } = recipe;
+										const { image, slug, title, shortTitle } = recipe;
 										return (
 											<Recipes.Card
 												key={index}
 												src={image}
 												alt={slug}
 												title={title}
+												shortTitle={shortTitle}
 												recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
 												articleUrl={`${ROUTES.ARTICLES}/${slug}`}
 											/>
@@ -142,6 +143,7 @@ export default function AllRecipes() {
 										key={rec._id}
 										image={rec.image}
 										title={rec.title}
+										shortTitle={rec.shortTitle}
 										slug={rec.slug}
 										to={`${ALL_RECIPES}/${rec.slug}`}
 									/>

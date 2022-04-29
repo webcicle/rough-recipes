@@ -62,7 +62,7 @@ export default function RecipePage(props) {
 	const {
 		_id,
 		appearsIn,
-		title,
+		fullTitle,
 		subtitle,
 		author,
 		image,
@@ -76,6 +76,7 @@ export default function RecipePage(props) {
 		ingredients,
 		instructions,
 		facts,
+		wordCount,
 	} = recipeData;
 
 	const {
@@ -86,7 +87,7 @@ export default function RecipePage(props) {
 		createTipsArr2,
 	} = useRecipe();
 
-	const statusProps = { author, createdAt, updatedAt, category };
+	const statusProps = { author, createdAt, updatedAt, category, wordCount };
 
 	const ingredientsArr = ingredients && createIngredientsArr(ingredients);
 	const ingredientsArr1 =
@@ -99,7 +100,7 @@ export default function RecipePage(props) {
 	const tips1Arr = tips1 && createTipsArr1(tips1);
 	const tips2Arr = tips2 && createTipsArr2(tips2);
 
-	const shareTitle = title + ' Gorcery List';
+	const shareTitle = fullTitle + ' Gorcery List';
 
 	console.log(tips1Arr);
 
@@ -113,7 +114,7 @@ export default function RecipePage(props) {
 							{appearsIn && createAppearsInArr(appearsIn)}
 						</AppearsIn.TagsContainer>
 					</AppearsIn>
-					<Recipe.Title>{title}</Recipe.Title>
+					<Recipe.Title>{fullTitle}</Recipe.Title>
 					<Recipe.Subtitle>{subtitle}</Recipe.Subtitle>
 					<StatusBar shortBar='false' statusProps={statusProps} />
 					<Recipe.MainContent>

@@ -7,7 +7,7 @@ export default function StatusBar({
 	children,
 	...restProps
 }) {
-	const { author, createdAt, updatedAt, category } = statusProps;
+	const { author, createdAt, updatedAt, category, wordCount } = statusProps;
 	const formatDate = (date) => {
 		return date.split('T')[0];
 	};
@@ -31,7 +31,9 @@ export default function StatusBar({
 				</StatusBar.Post>
 			)}
 			<StatusBar.Post shortBar={shortBar}>
-				<StatusBar.Title>10 min</StatusBar.Title>
+				<StatusBar.Title>
+					{wordCount ? Math.ceil(wordCount / 160) : 5} min
+				</StatusBar.Title>
 				<StatusBar.Value>read</StatusBar.Value>
 			</StatusBar.Post>
 			{children}
