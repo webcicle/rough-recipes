@@ -58,8 +58,12 @@ export const Image = styled.img`
 
 export const Title = styled.h2`
 	font-family: var(--primary-font);
-	font-size: var(--fs-step--1);
+	font-size: var(--fs-step-1);
 	margin-bottom: var(--margin-bottom);
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		font-size: var(--fs-step-3);
+	}
 `;
 
 export const Synopsis = styled.p`

@@ -19,9 +19,10 @@ export default function RecipeCard({ recipe }) {
 		slug,
 		createdAt,
 		updatedAt,
+		wordCount,
 	} = recipe;
 
-	const statusProps = { author, createdAt, updatedAt };
+	const statusProps = { author, createdAt, updatedAt, wordCount };
 
 	return (
 		<RecipeCard.Container {...restProps}>

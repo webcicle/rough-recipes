@@ -5,6 +5,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
 	user: user ? user : null,
+	favouriteRecipes: null,
 	isError: false,
 	isLoading: false,
 	isSuccess: false,
@@ -64,6 +65,24 @@ export const editUser = createAsyncThunk(
 				error.request ||
 				error.toString();
 			return thunkAPI.rejectWithValue(message || 'There was an error editing');
+		}
+	}
+);
+
+export const getUserFavourites = createAsyncThunk(
+	'auth/getUserFavourites',
+	async (props, thunkAPI) => {
+		try {
+			return await authServices.getFavourites(props);
+		} catch (error) {
+			const message =
+				(error.reponse && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.request ||
+				error.toString();
+			return thunkAPI.rejectWithValue(
+				message || 'There was an error getting the favourites'
+			);
 		}
 	}
 );
@@ -128,6 +147,23 @@ const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.user = null;
+			})
+			.addCase(getUserFavourites.pending, (state) => {
+				state.isLoading = true;
+				state.isError = false;
+				state.message = '';
+				state.favouriteRecipes = null;
+			})
+			.addCase(getUserFavourites.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.favouriteRecipes = action.payload;
+			})
+			.addCase(getUserFavourites.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
+				state.favouriteRecipes = null;
 			});
 	},
 });

@@ -31,7 +31,6 @@ export const Button = styled.button`
 	height: 3.5rem;
 	border: none;
 	text-transform: uppercase;
-	font-size: 1.8rem;
 	letter-spacing: 8px;
 	font-family: var(--secondary-font);
 	cursor: pointer;
@@ -43,6 +42,13 @@ export const Button = styled.button`
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		width: 50%;
+		font-size: var(--fs-step-1);
+	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step-0);
+	}
+	@media (max-width: ${TABLET_WIDTH}px) {
+		font-size: var(--fs-step-4);
 	}
 `;
 

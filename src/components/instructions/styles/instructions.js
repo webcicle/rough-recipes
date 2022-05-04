@@ -35,12 +35,12 @@ export const Slide = styled.div`
 	top: 0;
 	left: 50%;
 	display: grid;
-	align-items: center;
+	align-items: flex-start;
 	text-align: left;
 	width: 80%;
 	min-height: 200px;
 
-	height: fit-content;
+	height: 100%;
 
 	margin-inline: auto;
 	padding: 2rem;

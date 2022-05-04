@@ -9,6 +9,7 @@ export const Container = styled.div`
 		#17ecb9 0%,
 		rgba(89, 217, 109, 0.42) 70.83%
 	);
+
 	width: 100%;
 	min-height: 40px;
 	position: relative;
@@ -200,13 +201,14 @@ export const Menu = styled.div`
 			content: '';
 			position: absolute;
 			inset: 0;
+			background: rgba(0, 0, 0);
 			background: radial-gradient(
 				106.2% 106.2% at 50% 11.23%,
 				#313131 48.55%,
 				#70e6cd 100%
 			);
 			filter: blur(600px);
-			-webkit-filter: blur(600px);
+			-webkit-filter: blur(150px);
 		}
 	}
 `;

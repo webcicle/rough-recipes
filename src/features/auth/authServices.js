@@ -18,15 +18,19 @@ const loginUser = async (userData) => {
 
 	const { id, token, favourites, comments } = user.data;
 
-	console.log(user.data);
-
 	if (user.data) {
-		localStorage.setItem(
-			'user',
-			JSON.stringify({ id, token, favourites, comments })
-		);
+		localStorage.setItem('user', JSON.stringify(user.data));
 	}
 
+	return user.data;
+};
+
+const getFavourites = async (props) => {
+	const { ids, token } = props;
+	const axiosConfig = {
+		headers: { Authorization: `Bearer ${token}` },
+	};
+	const user = await axios.post(USER_URL + 'favourites', ids, axiosConfig);
 	return user.data;
 };
 
@@ -59,6 +63,7 @@ const authServices = {
 	loginUser,
 	logoutUser,
 	editUser,
+	getFavourites,
 };
 
 export default authServices;

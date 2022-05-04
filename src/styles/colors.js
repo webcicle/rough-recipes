@@ -6,7 +6,7 @@ const theme = css`
 		--primary-color: #17ecb9;
 		--primary-color-light: rgba(89, 217, 109, 0.62);
 		--secondary-color: #eec584;
-		--secondary-color-dark: #eec584;
+		--secondary-color-dark: #ec9a18;
 		--main-bg-color: #c8ebed;
 		--accent-bg-color: #2ac3cc;
 		--grey-color: #e7e7e7;
@@ -20,7 +20,7 @@ const theme = css`
 		--instructions-bg: #e6e6e6;
 		/* --title-color-yellow: #ff8700; */ // old "yellow"
 		/* --title-color-yellow: #d88f2b; */
-		--title-color-yellow: #e9bb3f;
+		--title-color-yellow: #c89a1e;
 	}
 	.dark-theme {
 		--primary-color: #17ecb9;

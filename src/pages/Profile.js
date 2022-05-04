@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { logoutUser } from '../features/auth/authSlice';
-import { HOME } from '../constants/routes';
+import { logoutUser, getUserFavourites } from '../features/auth/authSlice';
+import { HOME, LOGIN } from '../constants/routes';
 import axios from 'axios';
 import globalToastConfig from '../styles/globalToastConfig';
 
@@ -13,13 +13,12 @@ export default function ProfilePage() {
 	const [editEmail, setEditEmail] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
 	const [inputData, setInputData] = useState('');
-	const [userData, setUserData] = useState({ email: '', username: '' });
+	const { user, favouriteRecipes } = useSelector((state) => state.auth);
 
 	const API_URL = '/api/users/me';
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { user } = useSelector((state) => state.auth);
 
 	const init = () => {
 		setEditEmail(false);
@@ -32,6 +31,8 @@ export default function ProfilePage() {
 	const axiosConfig = {
 		headers: { Authorization: `Bearer ${token}` },
 	};
+
+	// console.log({ redux: user, LS: JSON.parse(localStorage.getItem('user')) });
 
 	const changeEmail = async () => {
 		try {
@@ -58,14 +59,16 @@ export default function ProfilePage() {
 		setEditPassword(false);
 	};
 
-	const getUser = async () => {
-		const user = await axios.get(API_URL, axiosConfig);
-		setUserData(user.data);
-	};
+	// console.log(favouriteRecipes);
 
 	useEffect(() => {
-		getUser();
-	}, [editEmail]);
+		if (user === null) {
+			navigate(LOGIN);
+			return;
+		}
+		const axiosProps = { ids: user.favourites, token };
+		dispatch(getUserFavourites(axiosProps));
+	}, []);
 
 	const handleChange = (e) => {
 		const { value } = e.target;
@@ -95,7 +98,7 @@ export default function ProfilePage() {
 				<Spinner />
 			) : (
 				<ContentContainer height='285px' direction='up'>
-					<Profile>
+					<Profile justify={true}>
 						<Profile.Title>Profile page</Profile.Title>
 						<Profile.Details>
 							{editPassword ? (
@@ -107,7 +110,7 @@ export default function ProfilePage() {
 							) : (
 								<Profile.Detail>
 									<Profile.DetailTitle>username:</Profile.DetailTitle>
-									<Profile.DetailValue>{userData.username}</Profile.DetailValue>
+									<Profile.DetailValue>{user.username}</Profile.DetailValue>
 								</Profile.Detail>
 							)}
 							{editEmail ? (
@@ -119,7 +122,7 @@ export default function ProfilePage() {
 							) : (
 								<Profile.Detail>
 									<Profile.DetailTitle>email:</Profile.DetailTitle>
-									<Profile.DetailValue>{userData.email}</Profile.DetailValue>
+									<Profile.DetailValue>{user.email}</Profile.DetailValue>
 								</Profile.Detail>
 							)}
 						</Profile.Details>
@@ -152,6 +155,26 @@ export default function ProfilePage() {
 							)}
 						</Profile.Edits>
 					</Profile>
+					{favouriteRecipes ? (
+						<Profile>
+							<Profile.Title>favourited recipes</Profile.Title>
+							<Profile.List>
+								{favouriteRecipes.length > 0 ? (
+									favouriteRecipes.map((fav, i) => (
+										<Profile.ListItem key={i} recipe={fav}>
+											{fav.fullTitle}
+										</Profile.ListItem>
+									))
+								) : (
+									<Profile.DetailTitle>
+										You haven't favourited any recipes yet
+									</Profile.DetailTitle>
+								)}
+							</Profile.List>
+						</Profile>
+					) : (
+						<Spinner />
+					)}
 				</ContentContainer>
 			)}
 		</>

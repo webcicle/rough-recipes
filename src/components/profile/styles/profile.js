@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import * as SCREEN_SIZES from '../../../constants/screen-sizes';
+import { Link as RouterLink } from 'react-router-dom';
 
 const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 
@@ -19,7 +20,8 @@ export const Container = styled.div`
 
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	${({ justify }) =>
+		justify ? 'justify-content: space-between;' : 'justify-content: unset;'}
 
 	@media (max-width: ${TABLET_WIDTH}px) and (min-width: ${DESKTOP_WIDTH}px) {
 		margin-top: 2rem;
@@ -31,7 +33,9 @@ export const Container = styled.div`
 	}
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+	font-size: var(--fs-step-2);
+`;
 
 export const Details = styled.div`
 	margin-bottom: 1.5em;
@@ -45,7 +49,10 @@ export const Detail = styled.div`
 `;
 
 export const DetailTitle = styled.h3`
-	font-size: var(--fs);
+	font-size: var(--fs-step-0);
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step--2);
+	}
 `;
 
 export const DetailValue = styled.p`
@@ -85,5 +92,36 @@ export const Input = styled.input`
 
 	&:last-of-type {
 		margin-bottom: 0.4em;
+	}
+`;
+
+export const List = styled.ul`
+	margin: 0;
+	margin-top: 1rem;
+	padding: 0;
+	list-style: none;
+	background-color: var(--grey-color);
+	padding: 1em 0.6em;
+	border-radius: var(--button-border-radius);
+	height: 150px;
+	overflow-y: scroll;
+`;
+
+export const ListItem = styled.li`
+	&:not(:last-child) {
+		margin-bottom: 0.6em;
+	}
+`;
+
+export const Link = styled(RouterLink)`
+	font-family: var(--primary-font);
+	font-size: var(--fs-step-0);
+	text-decoration: none;
+	cursor: pointer;
+	color: var(--secondary-color-dark);
+	transition: color 100ms ease-in;
+
+	&:hover {
+		color: var(--dark-grey-color);
 	}
 `;

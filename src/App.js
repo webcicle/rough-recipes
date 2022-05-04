@@ -14,6 +14,7 @@ import {
 import { HeaderContainer, Wrapper } from './containers';
 import { ToastContainer } from 'react-toastify';
 import * as ROUTES from './constants/routes';
+import { useSelector } from 'react-redux';
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -21,6 +22,8 @@ export default function App() {
 		// getRecipes();
 		dispatch(latestRecipes());
 	}, []);
+
+	const { user } = useSelector((state) => state.auth);
 
 	return (
 		<>

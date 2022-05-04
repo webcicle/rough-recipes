@@ -8,10 +8,18 @@ import {
 	DetailValue,
 	Edits,
 	Button,
+	List,
+	ListItem,
+	Link,
 } from './styles/profile';
+import { ALL_RECIPES } from '../../constants/routes';
 
-export default function Profile({ children, ...restProps }) {
-	return <Container {...restProps}>{children}</Container>;
+export default function Profile({ justify, children, ...restProps }) {
+	return (
+		<Container justify={justify} {...restProps}>
+			{children}
+		</Container>
+	);
 }
 
 Profile.Title = function ProfileTitle({ children, ...restProps }) {
@@ -52,4 +60,21 @@ Profile.EditButton = function ProfileEditButton({
 
 Profile.Input = function ProfileInput({ ...restProps }) {
 	return <Input {...restProps} />;
+};
+
+Profile.List = function ProfileList({ children, ...restProps }) {
+	return <List {...restProps}>{children}</List>;
+};
+
+Profile.ListItem = function ProfileListItem({
+	recipe,
+	children,
+	...restProps
+}) {
+	const { longTitel, slug } = recipe;
+	return (
+		<ListItem {...restProps}>
+			<Link to={`${ALL_RECIPES}/${slug}`}>{children}</Link>
+		</ListItem>
+	);
 };

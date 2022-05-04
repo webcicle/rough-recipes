@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
+const Recipes = require('../models/recipeModel');
 
 const passwordHasher = async (password) => {
 	const salt = await bcrypt.genSalt(10);
@@ -62,6 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 			id: user.id,
 			token: generateToken(user.id),
 			username: user.username,
+			email: user.email,
 			favourites: user.favourites,
 			comments: user.comments,
 		});
@@ -103,7 +105,7 @@ const editUser = asyncHandler(async (req, res) => {
 			email,
 		});
 		const { _id: id, favourites, comments } = user;
-		let newUser = { id, token: generateToken(id), favourites, comments };
+		let newUser = { ...user, token: generateToken(id) };
 
 		res.status(200).json({
 			message: `Edited user email: ${user.username}`,
@@ -118,7 +120,7 @@ const editUser = asyncHandler(async (req, res) => {
 		});
 
 		const { _id: id, favourites, comments } = user;
-		let newUser = { id, token: generateToken(id), favourites, comments };
+		let newUser = { ...user, token: generateToken(id) };
 
 		res.status(200).json({
 			message: `Edited user password: ${user.username}`,
@@ -133,6 +135,8 @@ const editUser = asyncHandler(async (req, res) => {
 		let newUser = {
 			id: user.id,
 			token: generateToken(user.id),
+			email: user.email,
+			username: user.username,
 			favourites,
 			comments: user.comments,
 		};
@@ -142,10 +146,24 @@ const editUser = asyncHandler(async (req, res) => {
 	}
 });
 
+const getFavourites = asyncHandler(async (req, res) => {
+	const favourites = req.body;
+	console.log(favourites);
+	const favRecipes = [];
+	if (favourites) {
+		for (let i = 0; i < favourites.length; i++) {
+			let recipe = await Recipes.findById(favourites[i]);
+			favRecipes.push(recipe);
+		}
+		res.status(200).json(favRecipes);
+	}
+	return;
+});
+
 // Generate token
 
 const generateToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-module.exports = { createUser, loginUser, getMe, editUser };
+module.exports = { createUser, loginUser, getMe, editUser, getFavourites };
