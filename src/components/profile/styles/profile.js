@@ -35,6 +35,10 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
 	font-size: var(--fs-step-2);
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step-1);
+	}
 `;
 
 export const Details = styled.div`
@@ -108,6 +112,10 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
 	&:not(:last-child) {
 		margin-bottom: 0.6em;
 	}
@@ -120,8 +128,22 @@ export const Link = styled(RouterLink)`
 	cursor: pointer;
 	color: var(--secondary-color-dark);
 	transition: color 100ms ease-in;
+	padding-left: 2rem;
 
 	&:hover {
 		color: var(--dark-grey-color);
 	}
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		padding-left: 4rem;
+	}
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step--2);
+	}
+`;
+
+export const Image = styled.img`
+	/* width: 80px; */
+	height: 2rem;
+	object-fit: cover;
 `;

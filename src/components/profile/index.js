@@ -2,6 +2,7 @@ import {
 	Container,
 	Title,
 	Input,
+	Image,
 	Details,
 	Detail,
 	DetailTitle,
@@ -71,9 +72,10 @@ Profile.ListItem = function ProfileListItem({
 	children,
 	...restProps
 }) {
-	const { longTitel, slug } = recipe;
+	const { longTitel, slug, image } = recipe;
 	return (
 		<ListItem {...restProps}>
+			<Image src={image} alt={slug} />
 			<Link to={`${ALL_RECIPES}/${slug}`}>{children}</Link>
 		</ListItem>
 	);

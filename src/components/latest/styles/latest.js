@@ -36,7 +36,7 @@ export const Title = styled.h1`
 	text-align: left;
 	margin-top: 1.5em;
 	margin-bottom: 0.8em;
-	font-size: var(--fs-step-3);
+	font-size: var(--fs-step-2);
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		letter-spacing: 0.24em;

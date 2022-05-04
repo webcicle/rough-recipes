@@ -59,8 +59,6 @@ export default function ProfilePage() {
 		setEditPassword(false);
 	};
 
-	// console.log(favouriteRecipes);
-
 	useEffect(() => {
 		if (user === null) {
 			navigate(LOGIN);
