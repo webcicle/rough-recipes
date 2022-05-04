@@ -33,22 +33,23 @@ const createUser = asyncHandler(async (req, res) => {
 		username,
 		email,
 		password: hashedPassword,
+		favourites: [],
+		comments: [],
 	});
 
 	if (newUser) {
 		res.status(201).json({
-			message: `User: ${newUser.username} created`,
 			id: newUser._id,
 			username: newUser.username,
 			email: newUser.email,
 			token: generateToken(newUser._id),
+			favourites: [],
+			comments: [],
 		});
 	} else {
 		res.status(400);
 		throw new Error('Invalid user data');
 	}
-
-	// res.status(200).json({ message: 'Created new user' });
 });
 
 const loginUser = asyncHandler(async (req, res) => {
@@ -58,9 +59,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
 	if (user && (await bcrypt.compare(password, user.password))) {
 		res.json({
-			message: `User: ${user.username} logged in`,
 			id: user.id,
 			token: generateToken(user.id),
+			username: user.username,
+			favourites: user.favourites,
+			comments: user.comments,
 		});
 	} else {
 		res.status(400);
@@ -72,12 +75,13 @@ const getMe = asyncHandler(async (req, res) => {
 	const { id } = req.user;
 	const me = await User.findById(id);
 	if (me) {
-		const { username, email } = me;
+		const { username, email, favourites, comments } = me;
 
 		res.status(200).json({
-			message: `My profile page`,
 			username,
 			email,
+			favourites,
+			comments,
 		});
 	} else {
 		throw new Error('No such user exists, please check your request');
@@ -85,12 +89,12 @@ const getMe = asyncHandler(async (req, res) => {
 });
 
 const editUser = asyncHandler(async (req, res) => {
-	const { email, password } = req.body;
+	const { email, password, favourites } = req.body;
 	const hashedPassword = password && (await passwordHasher(password));
 
 	let user;
-	if (!email && !password) {
-		throw new Error('Please enter an email address or a password');
+	if (!email && !password && !favourites) {
+		throw new Error('Please enter some data');
 		return;
 	}
 
@@ -98,13 +102,14 @@ const editUser = asyncHandler(async (req, res) => {
 		user = await User.findByIdAndUpdate(req.user.id, {
 			email,
 		});
-		const { _id: id } = user;
-		let newUser = { id, token: generateToken(id) };
+		const { _id: id, favourites, comments } = user;
+		let newUser = { id, token: generateToken(id), favourites, comments };
 
 		res.status(200).json({
 			message: `Edited user email: ${user.username}`,
 			user: newUser,
 		});
+		return;
 	}
 
 	if (!email && password) {
@@ -112,13 +117,28 @@ const editUser = asyncHandler(async (req, res) => {
 			password: hashedPassword,
 		});
 
-		const { _id: id } = user;
-		let newUser = { id, token: generateToken(id) };
+		const { _id: id, favourites, comments } = user;
+		let newUser = { id, token: generateToken(id), favourites, comments };
 
 		res.status(200).json({
 			message: `Edited user password: ${user.username}`,
 			user: newUser,
 		});
+		return;
+	}
+
+	if (favourites && !email && !password) {
+		user = await User.findByIdAndUpdate(req.user.id, { favourites });
+
+		let newUser = {
+			id: user.id,
+			token: generateToken(user.id),
+			favourites,
+			comments: user.comments,
+		};
+
+		res.status(200).json(newUser);
+		return;
 	}
 });
 

@@ -1,4 +1,10 @@
-import { Container, Title, TagsContainer, Tag } from './styles/appears-in';
+import {
+	Container,
+	Column,
+	Title,
+	TagsContainer,
+	Tag,
+} from './styles/appears-in';
 
 export default function AppearsIn({ children, ...restProps }) {
 	return <Container {...restProps}>{children}</Container>;
@@ -17,4 +23,8 @@ AppearsIn.TagsContainer = function AppearsInTagsContainer({
 
 AppearsIn.Tag = function AppearsInTag({ children, ...restProps }) {
 	return <Tag {...restProps}>{children}</Tag>;
+};
+
+AppearsIn.Column = function AppearsInColumn({ children, ...restProps }) {
+	return <Column {...restProps}>{children}</Column>;
 };

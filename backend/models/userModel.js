@@ -14,6 +14,12 @@ const User = mongoose.Schema(
 			type: String,
 			required: [true, 'Please enter a password'],
 		},
+		favourites: {
+			type: [String],
+		},
+		comments: {
+			type: [String],
+		},
 	},
 	{ timestamps: true }
 );

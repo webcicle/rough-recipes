@@ -17,6 +17,10 @@ export const SynopsisContainer = styled.div`
 
 export const Title = styled.h1`
 	margin-bottom: 0.3em;
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		word-wrap: break-word;
+	}
 `;
 
 export const Subtitle = styled.h3`

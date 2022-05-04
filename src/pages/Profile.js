@@ -1,6 +1,6 @@
 import ContentContainer from '../containers/content';
-import { Profile } from '../components';
-import { useDispatch } from 'react-redux';
+import { Profile, Spinner } from '../components';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -19,6 +19,7 @@ export default function ProfilePage() {
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { user } = useSelector((state) => state.auth);
 
 	const init = () => {
 		setEditEmail(false);
@@ -26,7 +27,7 @@ export default function ProfilePage() {
 		setInputData('');
 	};
 
-	const token = JSON.parse(localStorage.getItem('user')).token;
+	const token = user && JSON.parse(localStorage.getItem('user')).token;
 
 	const axiosConfig = {
 		headers: { Authorization: `Bearer ${token}` },
@@ -90,63 +91,69 @@ export default function ProfilePage() {
 
 	return (
 		<>
-			<ContentContainer height='285px' direction='up'>
-				<Profile>
-					<Profile.Title>Profile page</Profile.Title>
-					<Profile.Details>
-						{editPassword ? (
-							<Profile.Input
-								placeholder='Enter your new password'
-								value={inputData}
-								onChange={handleChange}
-							/>
-						) : (
-							<Profile.Detail>
-								<Profile.DetailTitle>username:</Profile.DetailTitle>
-								<Profile.DetailValue>{userData.username}</Profile.DetailValue>
-							</Profile.Detail>
-						)}
-						{editEmail ? (
-							<Profile.Input
-								placeholder='Enter your new email address'
-								value={inputData}
-								onChange={handleChange}
-							/>
-						) : (
-							<Profile.Detail>
-								<Profile.DetailTitle>email:</Profile.DetailTitle>
-								<Profile.DetailValue>{userData.email}</Profile.DetailValue>
-							</Profile.Detail>
-						)}
-					</Profile.Details>
-					<Profile.Edits>
-						{!editPassword && (
-							<Profile.EditButton
-								name='email'
-								onClick={editEmail ? changeEmail : setEdit}>
-								{!editEmail ? 'Change email address' : 'Save new email address'}
-							</Profile.EditButton>
-						)}
-						{!editEmail && (
-							<Profile.EditButton
-								name='password'
-								onClick={editPassword ? changePassword : setEdit}>
-								{!editPassword ? 'Change password' : 'Save new password'}
-							</Profile.EditButton>
-						)}
-						{!editEmail && !editPassword && (
-							<Profile.EditButton name='logout' onClick={logout}>
-								Logout
-							</Profile.EditButton>
-						)}
-						{(editEmail || editPassword) && (
-							<Profile.EditButton name='cancel' onClick={init}>
-								Cancel
-							</Profile.EditButton>
-						)}
-					</Profile.Edits>
-				</Profile>
-			</ContentContainer>
+			{!user ? (
+				<Spinner />
+			) : (
+				<ContentContainer height='285px' direction='up'>
+					<Profile>
+						<Profile.Title>Profile page</Profile.Title>
+						<Profile.Details>
+							{editPassword ? (
+								<Profile.Input
+									placeholder='Enter your new password'
+									value={inputData}
+									onChange={handleChange}
+								/>
+							) : (
+								<Profile.Detail>
+									<Profile.DetailTitle>username:</Profile.DetailTitle>
+									<Profile.DetailValue>{userData.username}</Profile.DetailValue>
+								</Profile.Detail>
+							)}
+							{editEmail ? (
+								<Profile.Input
+									placeholder='Enter your new email address'
+									value={inputData}
+									onChange={handleChange}
+								/>
+							) : (
+								<Profile.Detail>
+									<Profile.DetailTitle>email:</Profile.DetailTitle>
+									<Profile.DetailValue>{userData.email}</Profile.DetailValue>
+								</Profile.Detail>
+							)}
+						</Profile.Details>
+						<Profile.Edits>
+							{!editPassword && (
+								<Profile.EditButton
+									name='email'
+									onClick={editEmail ? changeEmail : setEdit}>
+									{!editEmail
+										? 'Change email address'
+										: 'Save new email address'}
+								</Profile.EditButton>
+							)}
+							{!editEmail && (
+								<Profile.EditButton
+									name='password'
+									onClick={editPassword ? changePassword : setEdit}>
+									{!editPassword ? 'Change password' : 'Save new password'}
+								</Profile.EditButton>
+							)}
+							{!editEmail && !editPassword && (
+								<Profile.EditButton name='logout' onClick={logout}>
+									Logout
+								</Profile.EditButton>
+							)}
+							{(editEmail || editPassword) && (
+								<Profile.EditButton name='cancel' onClick={init}>
+									Cancel
+								</Profile.EditButton>
+							)}
+						</Profile.Edits>
+					</Profile>
+				</ContentContainer>
+			)}
 		</>
 	);
 }

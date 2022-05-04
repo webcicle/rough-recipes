@@ -51,6 +51,23 @@ export const logoutUser = createAsyncThunk('auth/logout', async () => {
 	return authServices.logoutUser();
 });
 
+export const editUser = createAsyncThunk(
+	'auth/editUser',
+	async (props, thunkAPI) => {
+		const { favourites, token } = props;
+		try {
+			return await authServices.editUser(favourites, token);
+		} catch (error) {
+			const message =
+				(error.reponse && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.request ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message || 'There was an error editing');
+		}
+	}
+);
+
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
@@ -96,6 +113,20 @@ const authSlice = createSlice({
 				state.user = null;
 			})
 			.addCase(logoutUser.fulfilled, (state) => {
+				state.user = null;
+			})
+			.addCase(editUser.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(editUser.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+			})
+			.addCase(editUser.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 				state.user = null;
 			});
 	},

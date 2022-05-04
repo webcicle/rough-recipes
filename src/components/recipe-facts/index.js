@@ -14,8 +14,6 @@ export default function RecipeFacts({ facts, children, ...restProps }) {
 	const { calories, protein, carbs, fat, activeTime, totalTime, servings } =
 		facts ? facts : {};
 
-	console.log(facts, activeTime);
-
 	return (
 		<Container {...restProps}>
 			<Title>Nutritional facts (per 100g)</Title>

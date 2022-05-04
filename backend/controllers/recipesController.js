@@ -46,6 +46,40 @@ const editRecipe = asyncHandler(async (req, res) => {
 	});
 });
 
+const likeRecipe = asyncHandler(async (req, res) => {
+	const recipe = await Recipes.findOne({ slug: req.params.slug });
+
+	if (!recipe) {
+		res.status(400);
+		throw new Error('Recipe not found');
+	}
+
+	const likedRecipe = await Recipes.findOneAndUpdate(
+		{ slug: req.params.slug },
+		{ favourites: recipe.favourites + 1 || 1 },
+		{ new: true }
+	);
+
+	res.status(200).json(likedRecipe);
+});
+
+const unlikeRecipe = asyncHandler(async (req, res) => {
+	const recipe = await Recipes.findOne({ slug: req.params.slug });
+
+	if (!recipe) {
+		res.status(400);
+		throw new Error('Recipe not found');
+	}
+
+	const unlikedRecipe = await Recipes.findOneAndUpdate(
+		{ slug: req.params.slug },
+		{ favourites: recipe.favourites - 1 || 0 },
+		{ new: true }
+	);
+
+	res.status(200).json(unlikedRecipe);
+});
+
 const deleteRecipe = asyncHandler(async (req, res) => {
 	const recipe = await Recipes.findById(req.params.id);
 
@@ -62,7 +96,6 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 });
 
 const findRecipe = asyncHandler(async (req, res) => {
-	// const recipe = await Recipes.findById(req.params.id);
 	const recipe = await Recipes.findOne({ slug: req.params.slug });
 
 	if (!recipe) {
@@ -85,4 +118,6 @@ module.exports = {
 	deleteRecipe,
 	findLatestRecipes,
 	findRecipe,
+	likeRecipe,
+	unlikeRecipe,
 };

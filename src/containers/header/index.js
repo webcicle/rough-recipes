@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { DESKTOP_WIDTH } from '../../constants/screen-sizes';
 
 export default function HeaderContainer({ title }) {
-	const overlayImage = '/images/desktop-hover-overlay-home.png';
 	const [menuOpen, setMenuOpen] = useState(false);
 	const navigate = useNavigate();
 	const location = useLocation();

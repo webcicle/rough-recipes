@@ -101,6 +101,12 @@ const recipeSchema = mongoose.Schema(
 			type: Number,
 			required: true,
 		},
+		favourites: {
+			type: Number,
+		},
+		comments: {
+			type: [String],
+		},
 		createdAt: {
 			type: Date,
 		},

@@ -8,18 +8,18 @@ import {
 } from './styles/recipe-card';
 import { StatusBar } from '../index';
 
-export default function RecipeCard(props) {
+export default function RecipeCard({ recipe }) {
 	const {
 		restProps,
 		_id,
-		title,
+		shortTitle,
 		author,
 		synopsis,
 		image,
 		slug,
 		createdAt,
 		updatedAt,
-	} = props.recipe;
+	} = recipe;
 
 	const statusProps = { author, createdAt, updatedAt };
 
@@ -27,7 +27,9 @@ export default function RecipeCard(props) {
 		<RecipeCard.Container {...restProps}>
 			{image && <RecipeCard.Image src={image} alt={slug} />}
 			<RecipeCard.Bottom>
-				{title && <RecipeCard.Title slug={slug}>{title}</RecipeCard.Title>}
+				{shortTitle && (
+					<RecipeCard.Title slug={slug}>{shortTitle}</RecipeCard.Title>
+				)}
 				{statusProps && <StatusBar shortBar='true' statusProps={statusProps} />}
 				{synopsis && (
 					<RecipeCard.Synopsis>{synopsis[0].slice(0, 120)}</RecipeCard.Synopsis>
