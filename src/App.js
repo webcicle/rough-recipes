@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { latestRecipes } from './features/latest-recipes/latestRecipesSlice';
 import {
 	Articles,
+	Article,
 	Home,
 	Login,
 	Profile,
@@ -37,6 +38,7 @@ export default function App() {
 						<Route path={ROUTES.ALL_RECIPES} element={<AllRecipes />} />
 						<Route path={ROUTES.RECIPE} element={<Recipe />} />
 						<Route path={ROUTES.ARTICLES} element={<Articles />} />
+						<Route path={ROUTES.ARTICLE} element={<Article />} />
 
 						<Route path={ROUTES.PROFILE} element={<Profile />} />
 					</Routes>

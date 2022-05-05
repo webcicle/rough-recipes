@@ -7,7 +7,12 @@ export const Comment = styled.li`
 	flex-direction: column;
 	row-gap: 0.3em;
 	padding-block: 0.6em;
+	padding-left: 0.3em;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	&:nth-child(2n) {
+		background-color: var(--main-bg-color);
+	}
 
 	div {
 		display: flex;

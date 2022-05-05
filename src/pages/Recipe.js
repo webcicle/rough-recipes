@@ -151,8 +151,6 @@ export default function RecipePage(props) {
 	};
 
 	const handleComment = async () => {
-		// const newComments = [...comments, newComment];
-		// console.log(newComments);
 		const newRecipe = await axios.put(API_URL, newComment);
 		setNewComment({
 			user: user.username,

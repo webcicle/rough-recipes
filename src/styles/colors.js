@@ -10,6 +10,7 @@ const theme = css`
 		--main-bg-color: #c8ebed;
 		--accent-bg-color: #2ac3cc;
 		--grey-color: #e7e7e7;
+		--bg-grey-color: #c4c4c4;
 		--dark-grey-color: #030d1e;
 		--link-color: #c7c7c7;
 		--off-white-color: #f4f4f4;

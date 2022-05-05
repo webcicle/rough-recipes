@@ -8,10 +8,12 @@ import './styles/fonts.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { store } from './app/store';
+import SEO from './seo';
 
 render(
 	<>
 		<ReduxProvider store={store}>
+			<SEO />
 			<Normalize />
 			<GlobalStyles />
 			<ColorStyles />

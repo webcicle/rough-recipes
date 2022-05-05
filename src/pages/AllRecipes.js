@@ -89,51 +89,51 @@ export default function AllRecipes() {
 
 	return (
 		<>
-			<GridContainer>
-				<ContentContainer minHeight='true' direction='up'>
-					{!recipes ? (
-						<Spinner />
-					) : (
-						<Recipes>
-							<Recipes.MainTitle>All recipes</Recipes.MainTitle>
-							<Recipes.Inner>
-								{recipes &&
-									recipes.map((recipe, index) => {
-										const { image, slug, title, shortTitle } = recipe;
-										return (
-											<Recipes.Card
-												key={index}
-												src={image}
-												alt={slug}
-												title={title}
-												shortTitle={shortTitle}
-												recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
-												articleUrl={`${ROUTES.ARTICLES}/${slug}`}
-											/>
-										);
-									})}
-							</Recipes.Inner>
-						</Recipes>
-					)}
-					{totalPages > 1 && (
-						<PageSelector pages={totalPages}>
-							<PageSelector.PageSelectorDirection
-								id='left'
-								src={'/images/icons/chevron-left.png'}
-								onClick={decrementPageNumb}
-							/>
-							<PageSelector.NumberButtons>
-								{pageButtons ? pageButtons : null}
-							</PageSelector.NumberButtons>
-							<PageSelector.PageSelectorDirection
-								id='right'
-								src={'/images/icons/chevron-right.png'}
-								onClick={incrementPageNumb}
-							/>
-						</PageSelector>
-					)}
-				</ContentContainer>
-				<SidebarContainer columns={2} direction='right'>
+			{/* <GridContainer> */}
+			<ContentContainer minHeight='true' direction='up'>
+				{!recipes ? (
+					<Spinner />
+				) : (
+					<Recipes>
+						<Recipes.MainTitle>All recipes</Recipes.MainTitle>
+						<Recipes.Inner>
+							{recipes &&
+								recipes.map((recipe, index) => {
+									const { image, slug, title, shortTitle } = recipe;
+									return (
+										<Recipes.Card
+											key={index}
+											src={image}
+											alt={slug}
+											title={title}
+											shortTitle={shortTitle}
+											recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}
+											articleUrl={`${ROUTES.ARTICLES}/${slug}`}
+										/>
+									);
+								})}
+						</Recipes.Inner>
+					</Recipes>
+				)}
+				{totalPages > 1 && (
+					<PageSelector pages={totalPages}>
+						<PageSelector.PageSelectorDirection
+							id='left'
+							src={'/images/icons/chevron-left.png'}
+							onClick={decrementPageNumb}
+						/>
+						<PageSelector.NumberButtons>
+							{pageButtons ? pageButtons : null}
+						</PageSelector.NumberButtons>
+						<PageSelector.PageSelectorDirection
+							id='right'
+							src={'/images/icons/chevron-right.png'}
+							onClick={incrementPageNumb}
+						/>
+					</PageSelector>
+				)}
+			</ContentContainer>
+			{/* <SidebarContainer columns={2} direction='right'>
 					<Latest.Subtitle align='center'>latest recipes</Latest.Subtitle>
 					<Latest.Container>
 						{latest &&
@@ -150,8 +150,8 @@ export default function AllRecipes() {
 								);
 							})}
 					</Latest.Container>
-				</SidebarContainer>
-			</GridContainer>
+				</SidebarContainer> */}
+			{/* </GridContainer> */}
 		</>
 	);
 }

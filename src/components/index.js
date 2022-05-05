@@ -17,3 +17,6 @@ export { default as PreviewCard } from './preview-card';
 export { default as Spinner } from './spinner';
 export { default as Favourites } from './favourites';
 export { default as Comments } from './comments';
+export { default as Author } from './author';
+export { default as Article } from './article';
+export { default as ChefRecommends } from './chef-recommends';
