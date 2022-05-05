@@ -34,6 +34,14 @@ const getFavourites = async (props) => {
 	return user.data;
 };
 
+const getUser = async (token) => {
+	const axiosConfig = {
+		headers: { Authorization: `Bearer ${token}` },
+	};
+	const user = await axios.get(USER_URL, axiosConfig);
+	return user.data;
+};
+
 const logoutUser = () => {
 	localStorage.removeItem('user');
 };
@@ -64,6 +72,7 @@ const authServices = {
 	logoutUser,
 	editUser,
 	getFavourites,
+	getUser,
 };
 
 export default authServices;

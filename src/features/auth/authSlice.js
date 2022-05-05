@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import authServices from './authServices';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -51,6 +52,24 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk('auth/logout', async () => {
 	return authServices.logoutUser();
 });
+
+export const getUser = createAsyncThunk(
+	'auth/getUser',
+	async (token, thunkAPI) => {
+		try {
+			return await authServices.getUser(token);
+		} catch (error) {
+			const message =
+				(error.reponse && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.request ||
+				error.toString();
+			return thunkAPI.rejectWithValue(
+				message || 'There was an error getting the user'
+			);
+		}
+	}
+);
 
 export const editUser = createAsyncThunk(
 	'auth/editUser',
@@ -164,6 +183,21 @@ const authSlice = createSlice({
 				state.isError = true;
 				state.message = action.payload;
 				state.favouriteRecipes = null;
+			})
+			.addCase(getUser.pending, (state) => {
+				state.isLoading = true;
+				state.isError = false;
+				state.message = '';
+			})
+			.addCase(getUser.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+			})
+			.addCase(getUser.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.message = action.payload;
 			});
 	},
 });

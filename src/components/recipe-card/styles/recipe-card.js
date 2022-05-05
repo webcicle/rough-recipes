@@ -62,7 +62,7 @@ export const Title = styled.h2`
 	margin-bottom: var(--margin-bottom);
 
 	@media (max-width: ${TABLET_WIDTH}px) {
-		font-size: var(--fs-step-3);
+		font-size: var(--fs-step-2);
 	}
 `;
 

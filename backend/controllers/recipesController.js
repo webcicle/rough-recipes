@@ -25,25 +25,22 @@ const addRecipe = asyncHandler(async (req, res) => {
 });
 
 const editRecipe = asyncHandler(async (req, res) => {
-	const recipe = await Recipes.findById(req.params.id);
+	const recipe = await Recipes.findOne({ slug: req.params.slug });
 
 	if (!recipe) {
 		res.status(400);
 		throw new Error('Recipe not found');
 	}
 
-	const updatedRecipe = await Recipes.findByIdAndUpdate(
-		req.params.id,
-		req.body,
+	const updatedRecipe = await Recipes.findOneAndUpdate(
+		{ slug: req.params.slug },
+		{ $push: { comments: req.body } },
 		{
 			new: true,
 		}
 	);
 
-	res.status(200).json({
-		message: `Edited recipe with id: ${req.params.id}`,
-		data: updatedRecipe,
-	});
+	res.status(200).json(updatedRecipe);
 });
 
 const likeRecipe = asyncHandler(async (req, res) => {

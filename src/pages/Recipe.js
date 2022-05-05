@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ContentContainer, SidebarContainer } from '../containers';
 import styled from 'styled-components/macro';
@@ -14,6 +14,8 @@ import {
 	Share,
 	Instructions,
 	RecipeFacts,
+	Comments,
+	Profile,
 } from '../components';
 import {
 	FacebookShareButton,
@@ -30,6 +32,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../features/auth/authSlice';
 import { LOGIN } from '../constants/routes';
 import { toast } from 'react-toastify';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GridContainer = styled.div`
 	@media (min-width: ${DESKTOP_WIDTH - 50}px) {
@@ -40,7 +44,7 @@ const GridContainer = styled.div`
 		grid-template-rows: repeat(3, fit-content);
 		row-gap: 1.5rem;
 		margin-inline: auto;
-		grid-template-areas: 'a b c' 'a e c' 'f f f';
+		grid-template-areas: 'a b c' 'a e c' 'a f c' 'g g g';
 	}
 
 	@media (min-width: ${DESKTOP_WIDTH + 200}px) {
@@ -57,8 +61,10 @@ export default function RecipePage(props) {
 	const API_URL = `/api/recipes/${id}/`;
 	const [recipeData, setRecipeData] = useState({});
 	const [tipsTab, setTipsTab] = useState('left');
+
 	const dispatch = useDispatch();
 	const token = user && JSON.parse(localStorage.getItem('user')).token;
+	const commentsRef = useRef(null);
 
 	const {
 		_id,
@@ -78,6 +84,8 @@ export default function RecipePage(props) {
 		instructions,
 		facts,
 		wordCount,
+		comments,
+		favourites,
 	} = recipeData;
 
 	const favouritedByUser = user?.favourites && user.favourites.includes(_id);
@@ -89,6 +97,13 @@ export default function RecipePage(props) {
 		createTipsArr1,
 		createTipsArr2,
 	} = useRecipe();
+
+	const [newComment, setNewComment] = useState({
+		user: user.username,
+		comment: '',
+	});
+
+	console.log(new Date().getTimezoneOffset() / -60);
 
 	const fetchData = async () => {
 		const response = await axios.get(API_URL);
@@ -129,6 +144,22 @@ export default function RecipePage(props) {
 				throw new Error('Error liking the post');
 			}
 		}
+	};
+
+	const commentChange = ({ target }) => {
+		setNewComment((prev) => ({ ...prev, comment: target.value }));
+	};
+
+	const handleComment = async () => {
+		// const newComments = [...comments, newComment];
+		// console.log(newComments);
+		const newRecipe = await axios.put(API_URL, newComment);
+		setNewComment({
+			user: user.username,
+			comment: '',
+		});
+		fetchData();
+		commentsRef.current.scrollIntoView({ behaviour: 'smooth' });
 	};
 
 	useEffect(() => {
@@ -175,6 +206,13 @@ export default function RecipePage(props) {
 										You {favouritedByUser ? 'have' : "haven't"} favourited this
 									</Favourites.Text>
 								</Favourites.Button>
+								{favourites > 0 && (
+									<Favourites.Text className='last'>
+										{favourites === 1
+											? `${favourites} person has favourited this recipe`
+											: `${favourites} people have favourited this recipe`}
+									</Favourites.Text>
+								)}
 							</Favourites>
 						</AppearsIn.Column>
 					</AppearsIn>
@@ -246,6 +284,38 @@ export default function RecipePage(props) {
 				<Instructions instructions={instructions} />
 				<ContentContainer.Title>Recipe facts</ContentContainer.Title>
 				<RecipeFacts facts={facts} />
+			</ContentContainer>
+			<ContentContainer direction='center' area='f'>
+				<ContentContainer.Title>Comments</ContentContainer.Title>
+				<Comments>
+					<Comments.List>
+						{comments?.length > 0 ? (
+							comments.map((comment, i) => {
+								return <Comments.Comment comment={comment} key={i} />;
+							})
+						) : (
+							<Comments.Text>No comments yet</Comments.Text>
+						)}
+						{!comments && (
+							<Profile.SpinnerContainer>
+								<Profile.Spinner>
+									<FontAwesomeIcon icon={faSpinner} />
+								</Profile.Spinner>
+							</Profile.SpinnerContainer>
+						)}
+						<div ref={commentsRef} />
+					</Comments.List>
+					{user && (
+						<Comments.Input
+							value={newComment.comment}
+							onChange={commentChange}
+							placeholder='Tell us what you think about the recipe'
+						/>
+					)}
+					<Comments.Footer>
+						<Comments.Button onClick={handleComment}>Comment</Comments.Button>
+					</Comments.Footer>
+				</Comments>
 			</ContentContainer>
 			{window.innerWidth > DESKTOP_WIDTH && (
 				<SidebarContainer area='c' direction='right' />

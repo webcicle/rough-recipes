@@ -67,13 +67,32 @@ export const Link = styled(RouterLink)`
 	background-color: var(--primary-color-light);
 	padding: 0.45em 0.9em;
 	font-family: var(--primary-font);
-	font-size: var(--fs-step--2);
+	font-size: var(--fs-step-0);
 	color: var(--grey-color);
 	text-decoration: none;
 	border-radius: 100vh;
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		font-size: var(--fs-step-2);
+	}
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step--1);
+	}
 `;
 
 export const Title = styled.h2`
+	/* font-size: var(--fs-step--2); */
+
 	font-family: var(--primary-font);
-	font-size: var(--fs-step--2);
+	font-size: var(--fs-step-1);
+	margin-bottom: var(--margin-bottom);
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		font-size: var(--fs-step-3);
+	}
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		font-size: var(--fs-step-0);
+	}
 `;

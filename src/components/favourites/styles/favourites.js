@@ -3,6 +3,10 @@ import { faHeart, faHeartO } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	min-height: 70px;
+
 	@media (max-width: ${TABLET_WIDTH}px) {
 		width: 100%;
 	}
@@ -21,6 +25,8 @@ export const Button = styled.button`
 	border-radius: var(--button-border-radius);
 	cursor: pointer;
 	min-width: 250px;
+	margin-bottom: 0.5em;
+	margin-bottom: auto;
 
 	&:hover p {
 		color: var(--off-white-color);
@@ -38,4 +44,10 @@ export const Icon = styled.img`
 	max-height: 1.5rem;
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+	@media (max-width: ${TABLET_WIDTH}px) {
+		&:last-child {
+			text-align: center;
+		}
+	}
+`;

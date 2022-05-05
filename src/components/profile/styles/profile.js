@@ -147,3 +147,34 @@ export const Image = styled.img`
 	height: 2rem;
 	object-fit: cover;
 `;
+
+export const Spinner = styled.div`
+	/* height: 5vw; */
+
+	display: flex;
+	max-height: 45px;
+	animation-name: spin;
+	animation-duration: 700ms;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	svg {
+		height: 2vh;
+	}
+`;
+
+export const SpinnerContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	padding-block: 6rem;
+`;

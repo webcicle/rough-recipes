@@ -16,3 +16,4 @@ export { default as PageSelector } from './page-selector';
 export { default as PreviewCard } from './preview-card';
 export { default as Spinner } from './spinner';
 export { default as Favourites } from './favourites';
+export { default as Comments } from './comments';

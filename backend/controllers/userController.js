@@ -77,13 +77,15 @@ const getMe = asyncHandler(async (req, res) => {
 	const { id } = req.user;
 	const me = await User.findById(id);
 	if (me) {
-		const { username, email, favourites, comments } = me;
+		const { username, email, favourites, comments, _id } = me;
 
 		res.status(200).json({
 			username,
 			email,
 			favourites,
 			comments,
+			token: generateToken(_id),
+			id: _id,
 		});
 	} else {
 		throw new Error('No such user exists, please check your request');
@@ -148,7 +150,6 @@ const editUser = asyncHandler(async (req, res) => {
 
 const getFavourites = asyncHandler(async (req, res) => {
 	const favourites = req.body;
-	console.log(favourites);
 	const favRecipes = [];
 	if (favourites) {
 		for (let i = 0; i < favourites.length; i++) {

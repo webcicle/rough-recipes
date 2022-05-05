@@ -39,11 +39,12 @@ export const Slide = styled.div`
 	text-align: left;
 	width: 80%;
 	min-height: 200px;
+	max-height: fit-content;
 
 	height: 100%;
 
 	margin-inline: auto;
-	padding: 2rem;
+	padding: 3rem 1rem;
 	border-radius: 1em;
 	background-color: var(--off-white-color);
 
@@ -63,6 +64,10 @@ export const Slide = styled.div`
 	@media (max-width: ${TABLET_WIDTH}px) {
 		top: 50%;
 		transform: translate(-50%, -50%);
+	}
+
+	@media (max-height: 750px) {
+		max-height: 350px;
 	}
 `;
 

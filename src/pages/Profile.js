@@ -4,16 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { logoutUser, getUserFavourites } from '../features/auth/authSlice';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+	logoutUser,
+	getUserFavourites,
+	getUser,
+} from '../features/auth/authSlice';
 import { HOME, LOGIN } from '../constants/routes';
 import axios from 'axios';
 import globalToastConfig from '../styles/globalToastConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ProfilePage() {
 	const [editEmail, setEditEmail] = useState(false);
 	const [editPassword, setEditPassword] = useState(false);
 	const [inputData, setInputData] = useState('');
-	const { user, favouriteRecipes } = useSelector((state) => state.auth);
+	const { user, favouriteRecipes, isLoading } = useSelector(
+		(state) => state.auth
+	);
 
 	const API_URL = '/api/users/me';
 
@@ -37,6 +45,7 @@ export default function ProfilePage() {
 	const changeEmail = async () => {
 		try {
 			await axios.put(API_URL, { email: inputData }, axiosConfig);
+			window.location.reload(true);
 			toast('Email updated', globalToastConfig);
 		} catch (error) {
 			toast.error('Cannot change email', globalToastConfig);
@@ -66,6 +75,7 @@ export default function ProfilePage() {
 		}
 		const axiosProps = { ids: user.favourites, token };
 		dispatch(getUserFavourites(axiosProps));
+		dispatch(getUser(token));
 	}, []);
 
 	const handleChange = (e) => {
@@ -96,63 +106,71 @@ export default function ProfilePage() {
 				<Spinner />
 			) : (
 				<ContentContainer height='285px' direction='up'>
-					<Profile justify={true}>
-						<Profile.Title>Profile page</Profile.Title>
-						<Profile.Details>
-							{editPassword ? (
-								<Profile.Input
-									placeholder='Enter your new password'
-									value={inputData}
-									onChange={handleChange}
-								/>
-							) : (
-								<Profile.Detail>
-									<Profile.DetailTitle>username:</Profile.DetailTitle>
-									<Profile.DetailValue>{user.username}</Profile.DetailValue>
-								</Profile.Detail>
-							)}
-							{editEmail ? (
-								<Profile.Input
-									placeholder='Enter your new email address'
-									value={inputData}
-									onChange={handleChange}
-								/>
-							) : (
-								<Profile.Detail>
-									<Profile.DetailTitle>email:</Profile.DetailTitle>
-									<Profile.DetailValue>{user.email}</Profile.DetailValue>
-								</Profile.Detail>
-							)}
-						</Profile.Details>
-						<Profile.Edits>
-							{!editPassword && (
-								<Profile.EditButton
-									name='email'
-									onClick={editEmail ? changeEmail : setEdit}>
-									{!editEmail
-										? 'Change email address'
-										: 'Save new email address'}
-								</Profile.EditButton>
-							)}
-							{!editEmail && (
-								<Profile.EditButton
-									name='password'
-									onClick={editPassword ? changePassword : setEdit}>
-									{!editPassword ? 'Change password' : 'Save new password'}
-								</Profile.EditButton>
-							)}
-							{!editEmail && !editPassword && (
-								<Profile.EditButton name='logout' onClick={logout}>
-									Logout
-								</Profile.EditButton>
-							)}
-							{(editEmail || editPassword) && (
-								<Profile.EditButton name='cancel' onClick={init}>
-									Cancel
-								</Profile.EditButton>
-							)}
-						</Profile.Edits>
-					</Profile>
+					{isLoading ? (
+						<Profile.SpinnerContainer>
+							<Profile.Spinner>
+								<FontAwesomeIcon icon={faSpinner} />
+							</Profile.Spinner>
+						</Profile.SpinnerContainer>
+					) : (
+						<Profile justify={true}>
+							<Profile.Title>Profile page</Profile.Title>
+							<Profile.Details>
+								{editPassword ? (
+									<Profile.Input
+										placeholder='Enter your new password'
+										value={inputData}
+										onChange={handleChange}
+									/>
+								) : (
+									<Profile.Detail>
+										<Profile.DetailTitle>username:</Profile.DetailTitle>
+										<Profile.DetailValue>{user.username}</Profile.DetailValue>
+									</Profile.Detail>
+								)}
+								{editEmail ? (
+									<Profile.Input
+										placeholder='Enter your new email address'
+										value={inputData}
+										onChange={handleChange}
+									/>
+								) : (
+									<Profile.Detail>
+										<Profile.DetailTitle>email:</Profile.DetailTitle>
+										<Profile.DetailValue>{user.email}</Profile.DetailValue>
+									</Profile.Detail>
+								)}
+							</Profile.Details>
+							<Profile.Edits>
+								{!editPassword && (
+									<Profile.EditButton
+										name='email'
+										onClick={editEmail ? changeEmail : setEdit}>
+										{!editEmail
+											? 'Change email address'
+											: 'Save new email address'}
+									</Profile.EditButton>
+								)}
+								{!editEmail && (
+									<Profile.EditButton
+										name='password'
+										onClick={editPassword ? changePassword : setEdit}>
+										{!editPassword ? 'Change password' : 'Save new password'}
+									</Profile.EditButton>
+								)}
+								{!editEmail && !editPassword && (
+									<Profile.EditButton name='logout' onClick={logout}>
+										Logout
+									</Profile.EditButton>
+								)}
+								{(editEmail || editPassword) && (
+									<Profile.EditButton name='cancel' onClick={init}>
+										Cancel
+									</Profile.EditButton>
+								)}
+							</Profile.Edits>
+						</Profile>
+					)}
 					{favouriteRecipes ? (
 						<Profile>
 							<Profile.Title>favourited recipes</Profile.Title>
@@ -171,7 +189,11 @@ export default function ProfilePage() {
 							</Profile.List>
 						</Profile>
 					) : (
-						<Spinner />
+						<Profile.SpinnerContainer>
+							<Profile.Spinner>
+								<FontAwesomeIcon icon={faSpinner} />
+							</Profile.Spinner>
+						</Profile.SpinnerContainer>
 					)}
 				</ContentContainer>
 			)}

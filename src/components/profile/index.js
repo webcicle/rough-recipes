@@ -12,6 +12,8 @@ import {
 	List,
 	ListItem,
 	Link,
+	Spinner,
+	SpinnerContainer,
 } from './styles/profile';
 import { ALL_RECIPES } from '../../constants/routes';
 
@@ -65,6 +67,16 @@ Profile.Input = function ProfileInput({ ...restProps }) {
 
 Profile.List = function ProfileList({ children, ...restProps }) {
 	return <List {...restProps}>{children}</List>;
+};
+
+Profile.Spinner = function ProfileSpinner({ children, ...restProps }) {
+	return <Spinner {...restProps}>{children}</Spinner>;
+};
+Profile.SpinnerContainer = function ProfileSpinnerContainer({
+	children,
+	...restProps
+}) {
+	return <SpinnerContainer {...restProps}>{children}</SpinnerContainer>;
 };
 
 Profile.ListItem = function ProfileListItem({

@@ -1,17 +1,50 @@
 const mongoose = require('mongoose');
 
-const tipsSchema = mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-		trim: true,
+const tipsSchema = mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: true,
+			trim: true,
+		},
+		content: {
+			type: [String],
+			required: true,
+			trim: true,
+		},
 	},
-	content: {
-		type: [String],
-		required: true,
-		trim: true,
+	{ _id: false }
+);
+
+const dateSchema = mongoose.Schema(
+	{
+		date: {
+			type: String,
+			trim: true,
+		},
+		time: {
+			type: String,
+			trim: true,
+		},
 	},
-});
+	{ _id: false, timestamps: true }
+);
+
+const commentSchema = mongoose.Schema(
+	{
+		user: {
+			type: String,
+			required: true,
+			trim: true,
+		},
+		comment: {
+			type: String,
+			required: true,
+			trim: true,
+		},
+	},
+	{ _id: false, timestamps: true }
+);
 
 const factsSchema = mongoose.Schema({
 	calories: { type: String, required: true, trim: true },
@@ -105,7 +138,7 @@ const recipeSchema = mongoose.Schema(
 			type: Number,
 		},
 		comments: {
-			type: [String],
+			type: [commentSchema],
 		},
 		createdAt: {
 			type: Date,
