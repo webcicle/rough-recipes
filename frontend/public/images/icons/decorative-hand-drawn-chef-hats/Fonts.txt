@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Code
+Author: Fontfabric
+Url: http://www.fontsquirrel.com/fonts/code
+
+Font: Milkshake
+Author: Laura Worthington
+Url: https://www.fontsquirrel.com/fonts/milkshake
