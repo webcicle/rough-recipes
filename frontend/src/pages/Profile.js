@@ -105,7 +105,7 @@ export default function ProfilePage() {
 			{!user ? (
 				<Spinner />
 			) : (
-				<ContentContainer height='285px' direction='up'>
+				<ContentContainer minHeight height='285px' direction='up'>
 					{isLoading ? (
 						<Profile.SpinnerContainer>
 							<Profile.Spinner>

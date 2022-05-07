@@ -14,7 +14,7 @@ export const Main = styled.main`
 	box-shadow: 6px 4px 20px rgba(0, 0, 0, 0.25);
 	overflow-y: hidden;
 	z-index: 1;
-	min-height: ${({ minHeight }) => minHeight && 'calc(100vh - 8rem)'};
+	min-height: ${({ minHeight }) => minHeight && 'calc(100vh - 6rem)'};
 
 	// dynamic border radius, based on the component property 'direction'
 	// can be set to 'up' – border at the bottom, 'down' - border at the top, and 'center' - all around.

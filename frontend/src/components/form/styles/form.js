@@ -3,8 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 
 export const Container = styled.div`
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
+	align-items: center;
+	flex-direction: column;
 	margin-top: 5rem;
+	min-height: calc(100vh - 6rem);
 `;
 
 export const Title = styled.h1`
