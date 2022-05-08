@@ -36,6 +36,10 @@ export const List = styled.ul`
 	padding-right: 1em;
 	max-height: 150px;
 	overflow-y: scroll;
+
+	.end {
+		width: 100%;
+	}
 `;
 
 export const Text = styled.p``;

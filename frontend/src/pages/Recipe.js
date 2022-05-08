@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ContentContainer, SidebarContainer } from '../containers';
 import styled from 'styled-components/macro';
@@ -34,6 +34,7 @@ import { LOGIN } from '../constants/routes';
 import { toast } from 'react-toastify';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SpinnerContainer from '../components/spinner';
 
 const GridContainer = styled.div`
 	@media (min-width: ${DESKTOP_WIDTH - 50}px) {
@@ -64,7 +65,8 @@ export default function RecipePage(props) {
 
 	const dispatch = useDispatch();
 	const token = user && JSON.parse(localStorage.getItem('user')).token;
-	const commentsRef = useRef(null);
+	const commentsRef = useRef();
+	const commentsBoxRef = useRef();
 
 	const {
 		_id,
@@ -148,6 +150,11 @@ export default function RecipePage(props) {
 		setNewComment((prev) => ({ ...prev, comment: target.value }));
 	};
 
+	const scrollToBottom = () => {
+		commentsRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+		commentsBoxRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+	};
+
 	const handleComment = async () => {
 		const newRecipe = await axios.put(API_URL, newComment);
 		setNewComment({
@@ -155,12 +162,23 @@ export default function RecipePage(props) {
 			comment: '',
 		});
 		fetchData();
-		commentsRef.current.scrollIntoView({ behaviour: 'smooth' });
 	};
 
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	const [renderCounts, setRenderCounts] = useState(0);
+
+	useLayoutEffect(() => {
+		if (renderCounts < 2) {
+			setRenderCounts((prev) => prev + 1);
+			scrollToBottom();
+			window.scrollTo(0, 0);
+			return;
+		}
+		scrollToBottom();
+	}, [recipeData.comments]);
 
 	const statusProps = { author, createdAt, updatedAt, category, wordCount };
 
@@ -179,140 +197,154 @@ export default function RecipePage(props) {
 
 	return (
 		<GridContainer>
-			<ContentContainer order='1' area='b' direction='up'>
-				<Recipe>
-					<AppearsIn>
-						<AppearsIn.Column>
-							<AppearsIn.Title>AppearsIn: </AppearsIn.Title>
-							<AppearsIn.TagsContainer>
-								{appearsIn && createAppearsInArr(appearsIn)}
-							</AppearsIn.TagsContainer>
-						</AppearsIn.Column>
-						<AppearsIn.Column>
-							<Favourites>
-								<Favourites.Button onClick={handleFavourite}>
-									<Favourites.Icon
-										icon={
-											favouritedByUser
-												? '/images/icons/like-heart.png'
-												: '/images/icons/unlike-heart.png'
-										}
-									/>
-									<Favourites.Text>
-										You {favouritedByUser ? 'have' : "haven't"} favourited this
-									</Favourites.Text>
-								</Favourites.Button>
-								{favourites > 0 && (
-									<Favourites.Text className='last'>
-										{favourites === 1
-											? `${favourites} person has favourited this recipe`
-											: `${favourites} people have favourited this recipe`}
-									</Favourites.Text>
+			{recipeData ? (
+				<>
+					<ContentContainer order='1' area='b' direction='up'>
+						<Recipe>
+							<AppearsIn>
+								<AppearsIn.Column>
+									<AppearsIn.Title>AppearsIn: </AppearsIn.Title>
+									<AppearsIn.TagsContainer>
+										{appearsIn && createAppearsInArr(appearsIn)}
+									</AppearsIn.TagsContainer>
+								</AppearsIn.Column>
+								<AppearsIn.Column>
+									<Favourites>
+										<Favourites.Button onClick={handleFavourite}>
+											<Favourites.Icon
+												icon={
+													favouritedByUser
+														? '/images/icons/like-heart.png'
+														: '/images/icons/unlike-heart.png'
+												}
+											/>
+											<Favourites.Text>
+												You {favouritedByUser ? 'have' : "haven't"} favourited
+												this
+											</Favourites.Text>
+										</Favourites.Button>
+										{favourites > 0 && (
+											<Favourites.Text className='last'>
+												{favourites === 1
+													? `${favourites} person has favourited this recipe`
+													: `${favourites} people have favourited this recipe`}
+											</Favourites.Text>
+										)}
+									</Favourites>
+								</AppearsIn.Column>
+							</AppearsIn>
+							<Recipe.Title>{fullTitle}</Recipe.Title>
+							<Recipe.Subtitle>{subtitle}</Recipe.Subtitle>
+							<StatusBar shortBar='false' statusProps={statusProps} />
+							<Recipe.MainContent>
+								<Recipe.Image src={image} alt={slug} />
+								<Recipe.SynopsisContainer>
+									{synopsis && createSynopsisArr(synopsis)}
+								</Recipe.SynopsisContainer>
+							</Recipe.MainContent>
+							<TipsAndTricks>
+								<TipsAndTricks.Header>
+									<TipsAndTricks.Button
+										active={tipsTab === 'left' ? true : false}
+										onClick={() => setTipsTab('left')}>
+										{tips1 && tips1.title}
+									</TipsAndTricks.Button>
+									<TipsAndTricks.Button
+										active={tipsTab === 'right' ? true : false}
+										onClick={() => setTipsTab('right')}>
+										{tips2 && tips2.title}
+									</TipsAndTricks.Button>
+								</TipsAndTricks.Header>
+								<TipsAndTricks.Content>
+									{tipsTab === 'left' ? (
+										<TipsAndTricks.List>{tips1Arr}</TipsAndTricks.List>
+									) : (
+										tips2Arr
+									)}
+								</TipsAndTricks.Content>
+							</TipsAndTricks>
+						</Recipe>
+					</ContentContainer>
+					<SidebarContainer
+						direction={window.innerWidth < DESKTOP_WIDTH ? 'center' : 'left'}
+						area='a'>
+						<GroceryList>
+							<GroceryList.Header>
+								<GroceryList.Title>Gorcery List</GroceryList.Title>
+								<Share>
+									<FacebookShareButton
+										url={window.location.href}
+										quote={shareTitle}>
+										<FacebookIcon />
+									</FacebookShareButton>
+									<TwitterShareButton
+										url={window.location.href}
+										title={shareTitle}>
+										<TwitterIcon />
+									</TwitterShareButton>
+									<TelegramShareButton
+										url={window.location.href}
+										title={shareTitle}>
+										<TelegramIcon />
+									</TelegramShareButton>
+									<EmailShareButton
+										url={window.location.href}
+										subject={shareTitle}>
+										<EmailIcon />
+									</EmailShareButton>
+								</Share>
+							</GroceryList.Header>
+							<GroceryList.List>
+								<GroceryList.Split>{ingredientsArr1}</GroceryList.Split>
+								<GroceryList.Split>{ingredientsArr2}</GroceryList.Split>
+							</GroceryList.List>
+						</GroceryList>
+					</SidebarContainer>
+					<ContentContainer order='2' area='e' direction='center'>
+						<ContentContainer.Title>Instructions</ContentContainer.Title>
+						<Instructions instructions={instructions} />
+						<ContentContainer.Title>Recipe facts</ContentContainer.Title>
+						<RecipeFacts facts={facts} />
+					</ContentContainer>
+					<ContentContainer direction='center' area='f'>
+						<ContentContainer.Title>Comments</ContentContainer.Title>
+						<Comments>
+							<Comments.List>
+								{comments?.length > 0 ? (
+									comments.map((comment, i) => {
+										return <Comments.Comment comment={comment} key={i} />;
+									})
+								) : (
+									<Comments.Text>No comments yet</Comments.Text>
 								)}
-							</Favourites>
-						</AppearsIn.Column>
-					</AppearsIn>
-					<Recipe.Title>{fullTitle}</Recipe.Title>
-					<Recipe.Subtitle>{subtitle}</Recipe.Subtitle>
-					<StatusBar shortBar='false' statusProps={statusProps} />
-					<Recipe.MainContent>
-						<Recipe.Image src={image} alt={slug} />
-						<Recipe.SynopsisContainer>
-							{synopsis && createSynopsisArr(synopsis)}
-						</Recipe.SynopsisContainer>
-					</Recipe.MainContent>
-					<TipsAndTricks>
-						<TipsAndTricks.Header>
-							<TipsAndTricks.Button
-								active={tipsTab === 'left' ? true : false}
-								onClick={() => setTipsTab('left')}>
-								{tips1 && tips1.title}
-							</TipsAndTricks.Button>
-							<TipsAndTricks.Button
-								active={tipsTab === 'right' ? true : false}
-								onClick={() => setTipsTab('right')}>
-								{tips2 && tips2.title}
-							</TipsAndTricks.Button>
-						</TipsAndTricks.Header>
-						<TipsAndTricks.Content>
-							{tipsTab === 'left' ? (
-								<TipsAndTricks.List>{tips1Arr}</TipsAndTricks.List>
-							) : (
-								tips2Arr
+								{!comments && (
+									<Profile.SpinnerContainer>
+										<Profile.Spinner>
+											<FontAwesomeIcon icon={faSpinner} />
+										</Profile.Spinner>
+									</Profile.SpinnerContainer>
+								)}
+								<div className='end' ref={commentsRef} />
+							</Comments.List>
+							{user && (
+								<Comments.Input
+									value={newComment.comment}
+									onChange={commentChange}
+									placeholder='Tell us what you think about the recipe'
+								/>
 							)}
-						</TipsAndTricks.Content>
-					</TipsAndTricks>
-				</Recipe>
-			</ContentContainer>
-			<SidebarContainer
-				direction={window.innerWidth < DESKTOP_WIDTH ? 'center' : 'left'}
-				area='a'>
-				<GroceryList>
-					<GroceryList.Header>
-						<GroceryList.Title>Gorcery List</GroceryList.Title>
-						<Share>
-							<FacebookShareButton
-								url={window.location.href}
-								quote={shareTitle}>
-								<FacebookIcon />
-							</FacebookShareButton>
-							<TwitterShareButton url={window.location.href} title={shareTitle}>
-								<TwitterIcon />
-							</TwitterShareButton>
-							<TelegramShareButton
-								url={window.location.href}
-								title={shareTitle}>
-								<TelegramIcon />
-							</TelegramShareButton>
-							<EmailShareButton url={window.location.href} subject={shareTitle}>
-								<EmailIcon />
-							</EmailShareButton>
-						</Share>
-					</GroceryList.Header>
-					<GroceryList.List>
-						<GroceryList.Split>{ingredientsArr1}</GroceryList.Split>
-						<GroceryList.Split>{ingredientsArr2}</GroceryList.Split>
-					</GroceryList.List>
-				</GroceryList>
-			</SidebarContainer>
-			<ContentContainer order='2' area='e' direction='center'>
-				<ContentContainer.Title>Instructions</ContentContainer.Title>
-				<Instructions instructions={instructions} />
-				<ContentContainer.Title>Recipe facts</ContentContainer.Title>
-				<RecipeFacts facts={facts} />
-			</ContentContainer>
-			<ContentContainer direction='center' area='f'>
-				<ContentContainer.Title>Comments</ContentContainer.Title>
-				<Comments>
-					<Comments.List>
-						{comments?.length > 0 ? (
-							comments.map((comment, i) => {
-								return <Comments.Comment comment={comment} key={i} />;
-							})
-						) : (
-							<Comments.Text>No comments yet</Comments.Text>
-						)}
-						{!comments && (
-							<Profile.SpinnerContainer>
-								<Profile.Spinner>
-									<FontAwesomeIcon icon={faSpinner} />
-								</Profile.Spinner>
-							</Profile.SpinnerContainer>
-						)}
-						<div ref={commentsRef} />
-					</Comments.List>
-					{user && (
-						<Comments.Input
-							value={newComment.comment}
-							onChange={commentChange}
-							placeholder='Tell us what you think about the recipe'
-						/>
-					)}
-					<Comments.Footer>
-						<Comments.Button onClick={handleComment}>Comment</Comments.Button>
-					</Comments.Footer>
-				</Comments>
-			</ContentContainer>
+							<Comments.Footer>
+								<Comments.Button onClick={handleComment}>
+									Comment
+								</Comments.Button>
+							</Comments.Footer>
+						</Comments>
+						<div ref={commentsBoxRef} />
+					</ContentContainer>
+				</>
+			) : (
+				<SpinnerContainer />
+			)}
 			{window.innerWidth > DESKTOP_WIDTH && (
 				<SidebarContainer area='c' direction='right' />
 			)}

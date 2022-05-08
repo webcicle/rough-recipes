@@ -23,3 +23,4 @@ export { default as Article } from './article';
 export { default as ChefRecommends } from './chef-recommends';
 export { default as Policy } from './policy';
 export { default as Contact } from './contact';
+export { default as About } from './about-us';
