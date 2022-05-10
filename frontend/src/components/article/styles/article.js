@@ -16,6 +16,13 @@ export const Title = styled.h1`
 	}
 `;
 
+export const Subtitle = styled.h2`
+	font-family: var(--secondary-font);
+	font-weight: 400;
+	font-size: var(--fs-step-0);
+	margin-bottom: 0.6em;
+`;
+
 export const Block = styled.div`
 	width: 100%;
 

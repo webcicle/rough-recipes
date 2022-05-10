@@ -7,6 +7,7 @@ import {
 	Paragraph,
 	Image,
 	Link,
+	Subtitle,
 } from './styles/article';
 
 export default function Article({ children, ...restProps }) {
@@ -19,6 +20,10 @@ Article.Header = function ArticleHeader({ children, ...restProps }) {
 
 Article.Title = function ArticleTitle({ children, ...restProps }) {
 	return <Title {...restProps}>{children}</Title>;
+};
+
+Article.Subtitle = function ArticleSubtitle({ children, ...restProps }) {
+	return <Subtitle {...restProps}>{children}</Subtitle>;
 };
 
 Article.Block = function ArticleBlock({ children, ...restProps }) {

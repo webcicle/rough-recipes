@@ -22,8 +22,8 @@ Recipes.Inner = function RecipesInner({ children, ...restProps }) {
 };
 
 Recipes.Card = function RecipesCard({
-	src,
-	alt,
+	path,
+	transformation,
 	title,
 	shortTitle,
 	articleUrl,
@@ -33,7 +33,7 @@ Recipes.Card = function RecipesCard({
 }) {
 	return (
 		<Card {...restProps}>
-			<Image src={src} alt={alt} />
+			<Image path={path} transformation={transformation} />
 			<Title>{shortTitle ? shortTitle : title}</Title>
 			<ButtonContainer>
 				<Link to={recipeUrl}>go to recipe</Link>

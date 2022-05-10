@@ -4,11 +4,7 @@ import * as SCREEN_SIZES from '../../../constants/screen-sizes.js';
 const { TABLET_WIDTH, DESKTOP_WIDTH } = SCREEN_SIZES;
 
 export const Container = styled.div`
-	background: linear-gradient(
-		90deg,
-		#17ecb9 0%,
-		rgba(89, 217, 109, 0.42) 70.83%
-	);
+	background: var(--nav-gradient);
 
 	width: 100%;
 	min-height: 40px;

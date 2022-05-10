@@ -8,6 +8,10 @@ const styles = css`
 		--margin-bottom-page: 2rem;
 	}
 
+	html {
+		background-color: black;
+	}
+
 	*,
 	*::before,
 	*::after {

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { useState } from 'react';
 import latestRecipesServices from './latestRecipesServices';
 
 export const latestRecipes = createAsyncThunk('latest/get', async () => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { IKImage } from 'imagekitio-react';
 import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
@@ -41,7 +42,7 @@ export const MainContent = styled.main`
 	}
 `;
 
-export const Image = styled.img`
+export const Image = styled(IKImage)`
 	max-height: 100%;
 	object-fit: cover;
 	object-position: center;

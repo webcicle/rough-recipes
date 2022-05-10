@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { latestRecipes } from './features/latest-recipes/latestRecipesSlice';
@@ -15,27 +15,30 @@ import {
 	TermsOfService,
 	Contact,
 	About,
+	Landing,
 } from './pages';
 import { HeaderContainer, Wrapper, FooterContainer } from './containers';
 import { ToastContainer } from 'react-toastify';
 import * as ROUTES from './constants/routes';
 import { useSelector } from 'react-redux';
+import { latestArticles } from './features/articles/articlesSlice';
 
 export default function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		// getRecipes();
 		dispatch(latestRecipes());
+		dispatch(latestArticles());
 	}, []);
 
-	const { user } = useSelector((state) => state.auth);
+	const { pathname } = useLocation();
 
 	return (
 		<>
 			<div className='App light-theme'>
-				<HeaderContainer />
+				{pathname !== '/' && <HeaderContainer />}
 				<Wrapper>
 					<Routes>
+						<Route path={'/'} element={<Landing />} />
 						<Route path={ROUTES.HOME} element={<Home />} />
 						<Route path={ROUTES.LOGIN} element={<Login />} />
 						<Route path={ROUTES.REGISTER} element={<Register />} />
@@ -51,7 +54,7 @@ export default function App() {
 						<Route path={ROUTES.TOS} element={<TermsOfService />} />
 					</Routes>
 				</Wrapper>
-				<FooterContainer />
+				{pathname !== '/' && <FooterContainer />}
 				<ToastContainer />
 			</div>
 		</>

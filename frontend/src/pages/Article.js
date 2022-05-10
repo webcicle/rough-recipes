@@ -18,7 +18,7 @@ const statusProps = {
 export default function ArticlePage() {
 	return (
 		<>
-			<GridContainer>
+			<GridContainer layout='articlePage'>
 				<ContentContainer direction='up'>
 					<Article>
 						<Article.Header>
@@ -26,6 +26,10 @@ export default function ArticlePage() {
 								stuffing chillies up your butt can make you gay - but is it
 								worth it?
 							</Article.Title>
+							<Article.Subtitle>
+								It's the second best thing after a burning ember - so why not
+								try it?
+							</Article.Subtitle>
 							<StatusBar shortBar='false' statusProps={statusProps} />
 						</Article.Header>
 						<Article.Block>

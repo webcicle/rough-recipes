@@ -5,6 +5,7 @@ import {
 	Container,
 	Icon,
 	Logo,
+	LogoText,
 	LogoContainer,
 	Menu,
 	LinksContainer,
@@ -19,10 +20,11 @@ Header.Container = function HeaderContainer({ children, ...restProps }) {
 	return <Container>{children}</Container>;
 };
 
-Header.Logo = function HeaderLogo({ src, menuOpen, ...restProps }) {
+Header.Logo = function HeaderLogo({ src, menuOpen, children, ...restProps }) {
 	return (
 		<LogoContainer menu={menuOpen}>
 			<Logo {...restProps} src={src} />
+			{children}
 		</LogoContainer>
 	);
 };

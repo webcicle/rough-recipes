@@ -10,3 +10,4 @@ export { default as Profile } from './Profile';
 export { default as Articles } from './Articles';
 export { default as Article } from './Article';
 export { default as AllRecipes } from './AllRecipes';
+export { default as Landing } from './Landing';

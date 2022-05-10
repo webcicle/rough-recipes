@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ContentContainer, SidebarContainer } from '../containers';
 import styled from 'styled-components/macro';
-import { DESKTOP_WIDTH } from '../constants/screen-sizes';
+import { DESKTOP_WIDTH, TABLET_WIDTH } from '../constants/screen-sizes';
 import {
 	AppearsIn,
 	StatusBar,
@@ -195,8 +195,13 @@ export default function RecipePage(props) {
 
 	const shareTitle = fullTitle + ' Gorcery List';
 
+	let imageWidth = 450;
+	if (window.innerWidth > DESKTOP_WIDTH) {
+		imageWidth = 380;
+	}
+
 	return (
-		<GridContainer>
+		<GridContainer layout='recipePage'>
 			{recipeData ? (
 				<>
 					<ContentContainer order='1' area='b' direction='up'>
@@ -237,7 +242,11 @@ export default function RecipePage(props) {
 							<Recipe.Subtitle>{subtitle}</Recipe.Subtitle>
 							<StatusBar shortBar='false' statusProps={statusProps} />
 							<Recipe.MainContent>
-								<Recipe.Image src={image} alt={slug} />
+								<Recipe.Image
+									path={`${slug}.png`}
+									transformation={[{ width: imageWidth }]}
+									alt={slug}
+								/>
 								<Recipe.SynopsisContainer>
 									{synopsis && createSynopsisArr(synopsis)}
 								</Recipe.SynopsisContainer>

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { Link as RouterLink } from 'react-router-dom';
+import { IKImage } from 'imagekitio-react';
 import {
 	DESKTOP_WIDTH,
 	IPAD_PRO_HEIGHT,
@@ -50,7 +51,7 @@ export const Card = styled.div`
 	}
 `;
 
-export const Image = styled.img`
+export const Image = styled(IKImage)`
 	display: block;
 	width: 100%;
 	height: 50vh;

@@ -7,16 +7,12 @@ import {
 	PreviewCard,
 	Spinner,
 } from '../components';
-import {
-	ContentContainer,
-	GridContainer,
-	SidebarContainer,
-} from '../containers';
+import { ContentContainer } from '../containers';
 import { useSearchParams } from 'react-router-dom';
 import { DESKTOP_WIDTH } from '../constants/screen-sizes';
 import * as ROUTES from '../constants/routes';
 import { useSelector } from 'react-redux';
-import { ALL_RECIPES } from '../constants/routes';
+import { TABLET_WIDTH } from '../constants/screen-sizes';
 
 export default function AllRecipes() {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -87,6 +83,11 @@ export default function AllRecipes() {
 		latest.length = 3;
 	}
 
+	let width = 450;
+	if (window.innerWidth > TABLET_WIDTH) {
+		width = 600;
+	}
+
 	return (
 		<>
 			{/* <GridContainer> */}
@@ -103,8 +104,8 @@ export default function AllRecipes() {
 									return (
 										<Recipes.Card
 											key={index}
-											src={image}
-											alt={slug}
+											path={`${slug}.png`}
+											transformation={[{ width }]}
 											title={title}
 											shortTitle={shortTitle}
 											recipeUrl={`${ROUTES.ALL_RECIPES}/${slug}`}

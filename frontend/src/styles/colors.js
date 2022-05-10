@@ -22,6 +22,18 @@ const theme = css`
 		/* --title-color-yellow: #ff8700; */ // old "yellow"
 		/* --title-color-yellow: #d88f2b; */
 		--title-color-yellow: #c89a1e;
+
+		//gradients
+		--nav-gradient: linear-gradient(
+			90deg,
+			#17ecb9 0%,
+			rgba(89, 217, 109, 0.42) 70.83%
+		);
+		--nav-gradient-rev: linear-gradient(
+			250deg,
+			#17ecb9 0%,
+			rgba(89, 217, 109, 0.42) 70.83%
+		);
 	}
 	.dark-theme {
 		--primary-color: #17ecb9;
