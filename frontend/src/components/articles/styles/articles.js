@@ -29,6 +29,10 @@ export const Container = styled.div`
 export const ImageContainer = styled.div`
 	position: relative;
 
+	&:last-child {
+		grid-column: span 2;
+	}
+
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		grid-area: ${({ className }) => (className ? className : '')};
 		&:hover .overlay {
@@ -47,13 +51,13 @@ export const ImageKitImage = styled(IKImage)`
 	display: block;
 	cursor: pointer;
 
-	@media (min-width: ${TABLET_WIDTH}px) {
-		&:nth-child(2n) {
-			border-left: 2px solid white;
+	@media (max-width: ${TABLET_WIDTH}px) {
+		&:not(.a) {
+			min-height: 100vh;
 		}
 
-		&:not(:nth-last-child(2), :last-child) {
-			border-bottom: 2px solid white;
+		&.a {
+			min-height: calc(100vh - 40px);
 		}
 	}
 
@@ -71,7 +75,6 @@ export const ImageKitImage = styled(IKImage)`
 `;
 
 export const Overlay = styled.div`
-	background: var(--nav-gradient-rev);
 	position: absolute;
 	z-index: 5;
 	inset: 0;
@@ -80,17 +83,34 @@ export const Overlay = styled.div`
 	justify-content: flex-end;
 	padding: 1em 0.8em;
 	cursor: pointer;
-	visibility: hidden;
-	opacity: 0;
-	border: 2px solid hidden;
+
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		background: var(--nav-gradient-rev);
+		visibility: hidden;
+		opacity: 0;
+		border: 2px solid hidden;
+	}
 `;
 
 export const OverlayTitle = styled.h2`
-	color: var(--off-white-color);
+	color: var(--primary-color);
+	text-transform: capitalize;
+	text-shadow: 2px 2px 1px var(--dark-grey-color);
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		text-shadow: 1px 1px 1px var(--dark-grey-color);
+
+		color: var(--off-white-color);
+	}
 `;
 
 export const OverlayDescription = styled.p`
-	color: var(--off-white-color);
+	color: var(--primary-color);
+	text-shadow: 2px 2px 1px var(--dark-grey-color);
+	@media (min-width: ${DESKTOP_WIDTH}px) {
+		text-shadow: 1px 1px 1px var(--dark-grey-color);
+
+		color: var(--off-white-color);
+	}
 	font-size: var(--fs-step-1);
 
 	@media (min-width: ${TABLET_WIDTH}px) {

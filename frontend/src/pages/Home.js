@@ -19,7 +19,10 @@ function Home() {
 
 	return (
 		<>
-			<ContentContainer direction='up' minHeight>
+			<ContentContainer
+				direction='up'
+				minHeight
+				maxWidth={`${DESKTOP_WIDTH + 200}`}>
 				{isLoading && !latest ? (
 					<Spinner />
 				) : (

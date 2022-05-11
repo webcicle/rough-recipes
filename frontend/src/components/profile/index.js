@@ -80,6 +80,7 @@ Profile.SpinnerContainer = function ProfileSpinnerContainer({
 };
 
 Profile.ListItem = function ProfileListItem({
+	path,
 	recipe,
 	children,
 	...restProps
@@ -87,7 +88,7 @@ Profile.ListItem = function ProfileListItem({
 	const { longTitel, slug, image } = recipe;
 	return (
 		<ListItem {...restProps}>
-			<Image src={image} alt={slug} />
+			<Image path={`${slug}.png`} transformation={[{ width: 25 }]} />
 			<Link to={`${ALL_RECIPES}/${slug}`}>{children}</Link>
 		</ListItem>
 	);

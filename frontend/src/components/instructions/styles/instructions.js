@@ -82,6 +82,7 @@ export const Button = styled.button`
 	background-color: var(--title-color-yellow);
 	color: var(--grey-color);
 	cursor: pointer;
+	z-index: 10;
 
 	&:first-of-type {
 		left: 0;

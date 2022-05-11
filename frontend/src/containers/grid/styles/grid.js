@@ -25,7 +25,7 @@ export const Container = styled.div`
 
 		${({ layout }) =>
 			layout == 'articlePage' &&
-			'display: grid;column-gap: 2rem;margin-inline: auto;grid-template-columns: 1fr 12vw; max-width: calc(${LORG_WIDTH}px - 4rem);'}
+			'display: grid;column-gap: 2rem;margin-inline: auto; max-width: calc(${LORG_WIDTH}px - 4rem);'}
 
 		color: unset;
 

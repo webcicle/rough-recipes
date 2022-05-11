@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
 import { Articles } from '../components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { DESKTOP_WIDTH, TABLET_WIDTH } from '../constants/screen-sizes';
 import { ARTICLES } from '../constants/routes';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../components';
 import { ContentContainer } from '../containers';
+import {
+	allArticles,
+	latestArticles,
+	reset,
+} from '../features/articles/articlesSlice';
+import { toast } from 'react-toastify';
 
 export default function ArticlesPage() {
-	let width = 400;
-	const isDesktop = window.innerWidth > DESKTOP_WIDTH;
-	const navigate = useNavigate();
-	const { latest, isLoading } = useSelector((state) => state.articles);
-
-	console.log(latest, isLoading);
-
 	const letters = [
 		'a',
 		'b',
@@ -32,6 +31,22 @@ export default function ArticlesPage() {
 		'n',
 		'o',
 	];
+	let width = 400;
+	const isDesktop = window.innerWidth > DESKTOP_WIDTH;
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { latest, articles, isError, isLoading, isSuccess, message } =
+		useSelector((state) => state.articles);
+
+	console.log(latest, articles, isLoading);
+
+	useEffect(() => {
+		dispatch(latestArticles());
+	}, []);
+
+	if (!isDesktop) {
+		width = 800;
+	}
 
 	if (isLoading) {
 		return (
@@ -67,7 +82,6 @@ export default function ArticlesPage() {
 						);
 					})}
 			</Articles>
-			)
 		</>
 	);
 }

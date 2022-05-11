@@ -5,6 +5,7 @@ export const Container = styled.div`
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: ${(props) => (props.shortBar == 'false' ? '0.9em' : '0.4em')};
+	font-size: clamp(10px, 2vh, 15px);
 `;
 
 export const Post = styled.div`

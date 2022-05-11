@@ -70,8 +70,11 @@ export const Main = styled.main`
 	}
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
-		/* max-width: ${DESKTOP_WIDTH - 100}px; */ //old SETTING in case it fucks up
-		max-width: calc(${LORG_WIDTH}px - 4rem);
+		max-width: ${({ maxWidth }) =>
+			maxWidth
+				? maxWidth
+				: `${DESKTOP_WIDTH + 50}`}px; //old SETTING in case it fucks up
+		/* max-width: calc(${LORG_WIDTH}px - 4rem); */
 		grid-area: ${({ area }) => area};
 	}
 `;

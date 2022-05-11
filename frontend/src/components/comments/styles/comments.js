@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div``;
 
@@ -45,7 +46,6 @@ export const List = styled.ul`
 export const Text = styled.p``;
 
 export const Input = styled.textarea`
-	margin-inline: 2rem;
 	width: calc(100% - 4rem);
 	resize: none;
 	min-height: 5rem;
@@ -58,6 +58,10 @@ export const Input = styled.textarea`
 	&:focus {
 		outline: none;
 		border: none;
+	}
+
+	@media (min-width: ${TABLET_WIDTH}px) {
+		margin-inline: 2rem;
 	}
 `;
 

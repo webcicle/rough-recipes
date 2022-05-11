@@ -23,6 +23,9 @@ export const Container = styled.aside`
 	}
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
+		max-width: ${DESKTOP_WIDTH + 30}px;
+		margin-inline: auto;
+
 		&:first-child {
 			grid-area: ${({ area }) => (area ? area : null)};
 		}

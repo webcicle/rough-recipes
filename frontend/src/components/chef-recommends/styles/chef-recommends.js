@@ -1,8 +1,10 @@
+import { IKImage } from 'imagekitio-react';
 import styled from 'styled-components/macro';
 import { TABLET_WIDTH } from '../../../constants/screen-sizes';
 
 export const Container = styled.div`
 	margin-block: 2rem;
+	grid-row: 3 / span 1;
 `;
 
 export const Inner = styled.div`
@@ -25,7 +27,11 @@ export const Inner = styled.div`
 
 export const Column = styled.div``;
 
-export const Image = styled.img``;
+export const Image = styled(IKImage)`
+	max-width: 500px;
+	border-radius: 50%;
+	border: 6px solid var(--primary-color-light);
+`;
 
 export const Title = styled.h2`
 	margin-bottom: 0.6em;

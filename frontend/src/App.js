@@ -21,13 +21,13 @@ import { HeaderContainer, Wrapper, FooterContainer } from './containers';
 import { ToastContainer } from 'react-toastify';
 import * as ROUTES from './constants/routes';
 import { useSelector } from 'react-redux';
-import { latestArticles } from './features/articles/articlesSlice';
+import { allArticles, latestArticles } from './features/articles/articlesSlice';
 
 export default function App() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(latestRecipes());
-		dispatch(latestArticles());
+		// dispatch(latestArticles());
 	}, []);
 
 	const { pathname } = useLocation();

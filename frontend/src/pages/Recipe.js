@@ -101,7 +101,7 @@ export default function RecipePage(props) {
 	} = useRecipe();
 
 	const [newComment, setNewComment] = useState({
-		user: user.username,
+		user: user?.username,
 		comment: '',
 	});
 

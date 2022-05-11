@@ -1,8 +1,12 @@
 import styled from 'styled-components/macro';
 import { Link as RouterLink } from 'react-router-dom';
 import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
+import { IKImage } from 'imagekitio-react';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+	display: grid;
+	grid-auto-rows: min-content;
+`;
 
 export const Header = styled.div``;
 
@@ -12,7 +16,7 @@ export const Title = styled.h1`
 	margin-bottom: 0.6em;
 
 	@media (max-width: ${TABLET_WIDTH}px) {
-		font-size: var(--fs-step-3);
+		font-size: var(--fs-step-4);
 	}
 `;
 
@@ -21,6 +25,10 @@ export const Subtitle = styled.h2`
 	font-weight: 400;
 	font-size: var(--fs-step-0);
 	margin-bottom: 0.6em;
+
+	@media (max-width: ${TABLET_WIDTH}px) {
+		font-size: var(--fs-step-2);
+	}
 `;
 
 export const Block = styled.div`
@@ -30,21 +38,31 @@ export const Block = styled.div`
 		display: flex;
 		justify-content: space-between;
 		column-gap: 2rem;
+		margin-block: 0.6rem;
+
+		&:nth-child(odd) {
+			flex-direction: row-reverse;
+		}
 	}
 `;
 
 export const Content = styled.div`
-	/* max-width: 50%; */
 	display: flex;
+	margin-bottom: 1.2rem;
 
 	&:first-child,
 	&:nth-child(2) {
 		flex-direction: column;
 	}
+
+	&:has(Image) {
+		border: 1px solid red;
+	}
 `;
 
 export const Paragraph = styled.p`
 	font-size: var(--fs-step-0);
+	max-width: 700px;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		font-size: var(--fs-step--1);
@@ -59,22 +77,21 @@ export const Paragraph = styled.p`
 	}
 `;
 
-export const Image = styled.img`
-	object-fit: cover;
+export const Image = styled(IKImage)`
 	border-radius: var(--image-border-radius);
-	max-height: 400px;
+	max-height: 25rem;
+	object-fit: cover;
+	width: 100%;
 
 	@media (max-width: ${TABLET_WIDTH}px) {
-		margin-block: 1.2rem;
 		max-height: 600px;
+		max-width: 100%;
 	}
 
 	@media (min-width: ${TABLET_WIDTH}px) {
-		width: 30vw;
 		min-height: 100%;
 	}
 	@media (min-width: ${DESKTOP_WIDTH}px) {
-		width: 20vw;
 	}
 `;
 
@@ -84,7 +101,8 @@ export const Link = styled(RouterLink)`
 	text-decoration: none;
 	text-align: center;
 	display: block;
-	margin-block: 2rem;
+	margin-bottom: 2rem;
+	margin-top: 4rem;
 	letter-spacing: 2px;
 	color: var(--dark-grey-color);
 	cursor: pointer;

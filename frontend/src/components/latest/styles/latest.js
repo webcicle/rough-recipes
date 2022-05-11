@@ -32,15 +32,18 @@ export const Link = styled(RouterLink)`
 
 export const Title = styled.h1`
 	/* letter-spacing: 0.29em; */
-	letter-spacing: 0.38em;
+	letter-spacing: 0.66em;
 	text-align: center;
 	margin-top: 2em;
 	margin-bottom: 0.8em;
-	font-size: var(--fs-step-2);
+	font-size: var(--fs-step-4);
+	line-height: 2.25rem;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		margin-top: 1.5em;
 		letter-spacing: 0.24em;
+		line-height: auto;
+		font-size: var(--fs-step-2);
 	}
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		letter-spacing: 0.35em;
