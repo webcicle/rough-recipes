@@ -121,7 +121,7 @@ export const Link = styled.button`
 	border: 0;
 	z-index: 222;
 
-	@media (min-width: ${TABLET_WIDTH}px) {
+	@media (min-width: ${TABLET_WIDTH + 50}px) {
 		--top-row: 8.5rem;
 		--bottom-row: 6.5rem;
 		color: var(--link-color);

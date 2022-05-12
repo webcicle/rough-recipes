@@ -12,9 +12,11 @@ export const Container = styled.div`
 	align-items: center;
 	max-width: ${LORG_WIDTH}px;
 	margin-inline: auto;
+	padding-bottom: 10rem;
 
 	@media (min-width: ${TABLET_WIDTH}px) {
 		padding-inline: 0.2em;
+		padding-bottom: 6rem;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(2, minmax(100px, 125px));
@@ -23,6 +25,7 @@ export const Container = styled.div`
 
 	@media (min-width: ${DESKTOP_WIDTH}px) {
 		padding-inline: 2em;
+		padding-bottom: 4rem;
 	}
 `;
 

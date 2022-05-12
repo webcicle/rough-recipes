@@ -130,8 +130,7 @@ export default function ArticlePage() {
 							</Article.CallToAction>
 						</Article>
 					</ContentContainer>
-					<SidebarContainer
-						direction={window.innerWidth > 1700 ? 'right' : 'center'}>
+					<SidebarContainer direction='center'>
 						<Author>
 							<Author.Inner>
 								{specificAuthor ? (
