@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { axiosInstance } from '../../config';
 
 const API_URL = '/api/recipes/latest/';
 

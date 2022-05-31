@@ -10,12 +10,11 @@ import {
 	ChefRecommends,
 	Spinner,
 } from '../components';
-import { DESKTOP_WIDTH, LORG_WIDTH } from '../constants/screen-sizes';
 import { ARTICLES } from '../constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { latestArticles, reset } from '../features/articles/articlesSlice';
+import { reset } from '../features/articles/articlesSlice';
 import {
 	findAuthor,
 	reset as authorReset,
@@ -23,9 +22,7 @@ import {
 
 export default function ArticlePage() {
 	const { articles, isLoading } = useSelector((state) => state.articles);
-	const { specificAuthor, isLoading: authorIsLoading } = useSelector(
-		(state) => state.authors
-	);
+	const { specificAuthor } = useSelector((state) => state.authors);
 	const { slug } = useParams();
 	const dispatch = useDispatch();
 
@@ -40,7 +37,7 @@ export default function ArticlePage() {
 		return () => {
 			console.log('Delete storage');
 		};
-	}, []);
+	}, [author.id, dispatch]);
 
 	if (isLoading) {
 		return (
@@ -110,7 +107,10 @@ export default function ArticlePage() {
 												transformation={[{ width: 150 }]}
 											/>
 										) : (
-											<img src='https://rough-recipes-media.s3.amazonaws.com/sample-writer.png' />
+											<img
+												src='https://rough-recipes-media.s3.amazonaws.com/sample-writer.png'
+												alt='sample-writer'
+											/>
 										)}
 									</ChefRecommends.Column>
 									<ChefRecommends.Column>
@@ -139,7 +139,7 @@ export default function ArticlePage() {
 										transformation={[{ width: 150 }]}
 									/>
 								) : (
-									<img src='/images/sample-writer.png' />
+									<img src='/images/sample-writer.png' alt='sample-writer' />
 								)}
 								<Author.Title>about the writer</Author.Title>
 								<Author.Bio>

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.44e8c2cd.css",
+    "main.js": "/static/js/main.21bc97e8.js",
+    "static/media/porter-sans-inline-block.ttf": "/static/media/porter-sans-inline-block.a5ccd0324b78945aae6e.ttf",
+    "index.html": "/index.html",
+    "main.44e8c2cd.css.map": "/static/css/main.44e8c2cd.css.map",
+    "main.21bc97e8.js.map": "/static/js/main.21bc97e8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.44e8c2cd.css",
+    "static/js/main.21bc97e8.js"
+  ]
+}
