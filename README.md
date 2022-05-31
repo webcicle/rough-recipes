@@ -6,3 +6,4 @@ Features include:
 Full REST API with CRUD functionallity
 Paginated recipes page
 Comments and favourites functionallity
+Full-size recipes
