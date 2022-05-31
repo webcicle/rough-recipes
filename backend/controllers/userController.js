@@ -20,6 +20,8 @@ const createUser = asyncHandler(async (req, res) => {
 
 	const userExists = await User.findOne({ username });
 
+	console.log(userExists);
+
 	if (userExists) {
 		res.status(400);
 		throw new Error('User already exists');

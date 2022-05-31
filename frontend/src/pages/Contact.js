@@ -28,9 +28,6 @@ export default function ContactPage() {
 			});
 		}
 
-		console.log('Loading: ' + isLoading);
-		console.log('Success: ' + isSuccess);
-
 		if (isError) {
 			toast.error(message);
 		}
