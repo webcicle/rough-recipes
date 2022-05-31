@@ -110,7 +110,7 @@ export default function ArticlePage() {
 												transformation={[{ width: 150 }]}
 											/>
 										) : (
-											<img src='/images/sample-writer.png' />
+											<img src='https://rough-recipes-media.s3.amazonaws.com/sample-writer.png' />
 										)}
 									</ChefRecommends.Column>
 									<ChefRecommends.Column>

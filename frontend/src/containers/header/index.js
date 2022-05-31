@@ -31,7 +31,7 @@ export default function HeaderContainer({ title }) {
 				)}
 			</Header.Container>
 			<Header.Logo
-				src='/images/logo-main.png'
+				src='https://rough-recipes-media.s3.amazonaws.com/logo-main.png'
 				menuOpen={menuOpen}
 				onClick={() => openMenu()}
 			/>

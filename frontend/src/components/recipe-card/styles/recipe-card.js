@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import { Link as RouterLink } from 'react-router-dom';
 import { DESKTOP_WIDTH, TABLET_WIDTH } from '../../../constants/screen-sizes';
+import { IKImage } from 'imagekitio-react';
 
 export const Container = styled.div`
 	--margin-bottom: 0.5rem;
@@ -69,7 +70,7 @@ export const Link = styled(RouterLink)`
 	}
 `;
 
-export const Image = styled.img`
+export const Image = styled(IKImage)`
 	width: 100%;
 	height: 225px;
 	object-fit: cover;

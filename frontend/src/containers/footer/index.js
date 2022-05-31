@@ -13,7 +13,10 @@ export default function FooterContainer({ children, ...restProps }) {
 		<Container {...restProps}>
 			<Footer>
 				<Footer.Column area='a'>
-					<Footer.Image src='/images/logo-main.png' alt='footer-logo' />
+					<Footer.Image
+						src='https://rough-recipes-media.s3.amazonaws.com/logo-main.png'
+						alt='footer-logo'
+					/>
 				</Footer.Column>
 				<Footer.Column area='b'>
 					<Footer.Link href={INSTAGRAM_URL}>Instagram</Footer.Link>
